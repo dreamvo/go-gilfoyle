@@ -28,8 +28,11 @@ if [ "$release_note" = "" ]; then
     echo "[INFO] No command line input provided. Set \$release_note to $release_note"
 fi
 
-# Initialize the local directory as a Git repository
-git init
+# Generate module
+openapi-generator generate \
+    -i https://raw.githubusercontent.com/dreamvo/gilfoyle/master/api/docs/swagger.yaml \
+    -g go \
+    -o . --skip-validate-spec
 
 # Adds the files in the local repository and stages them for commit.
 git add .
