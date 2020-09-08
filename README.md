@@ -33,12 +33,12 @@ All URIs are relative to *http://localhost:8080*
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
 *HealthApi* | [**HealthGet**](docs/HealthApi.md#healthget) | **Get** /health | Check service status
-*VideosApi* | [**V1VideosGet**](docs/VideosApi.md#v1videosget) | **Get** /v1/videos | Query videos
-*VideosApi* | [**V1VideosIdDelete**](docs/VideosApi.md#v1videosiddelete) | **Delete** /v1/videos/{id} | Delete a video
-*VideosApi* | [**V1VideosIdGet**](docs/VideosApi.md#v1videosidget) | **Get** /v1/videos/{id} | Get a video
-*VideosApi* | [**V1VideosIdPatch**](docs/VideosApi.md#v1videosidpatch) | **Patch** /v1/videos/{id} | Update a video
-*VideosApi* | [**V1VideosIdUploadPost**](docs/VideosApi.md#v1videosiduploadpost) | **Post** /v1/videos/{id}/upload | Upload a video file
-*VideosApi* | [**V1VideosPost**](docs/VideosApi.md#v1videospost) | **Post** /v1/videos | Create a video
+*VideosApi* | [**VideosGet**](docs/VideosApi.md#videosget) | **Get** /videos | Query videos
+*VideosApi* | [**VideosIdDelete**](docs/VideosApi.md#videosiddelete) | **Delete** /videos/{id} | Delete a video
+*VideosApi* | [**VideosIdGet**](docs/VideosApi.md#videosidget) | **Get** /videos/{id} | Get a video
+*VideosApi* | [**VideosIdPatch**](docs/VideosApi.md#videosidpatch) | **Patch** /videos/{id} | Update a video
+*VideosApi* | [**VideosIdUploadPost**](docs/VideosApi.md#videosiduploadpost) | **Post** /videos/{id}/upload | Upload a video file
+*VideosApi* | [**VideosPost**](docs/VideosApi.md#videospost) | **Post** /videos | Create a video
 
 
 ## Documentation For Models

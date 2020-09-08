@@ -27,22 +27,22 @@ var (
 // VideosApiService VideosApi service
 type VideosApiService service
 
-// V1VideosGetOpts Optional parameters for the method 'V1VideosGet'
-type V1VideosGetOpts struct {
+// VideosGetOpts Optional parameters for the method 'VideosGet'
+type VideosGetOpts struct {
     Limit optional.Int32
     Offset optional.Int32
 }
 
 /*
-V1VideosGet Query videos
+VideosGet Query videos
 get latest videos
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param optional nil or *V1VideosGetOpts - Optional Parameters:
+ * @param optional nil or *VideosGetOpts - Optional Parameters:
  * @param "Limit" (optional.Int32) -  Max number of results
  * @param "Offset" (optional.Int32) -  Number of results to ignore
 @return InlineResponse200
 */
-func (a *VideosApiService) V1VideosGet(ctx _context.Context, localVarOptionals *V1VideosGetOpts) (InlineResponse200, *_nethttp.Response, error) {
+func (a *VideosApiService) VideosGet(ctx _context.Context, localVarOptionals *VideosGetOpts) (InlineResponse200, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
@@ -53,7 +53,7 @@ func (a *VideosApiService) V1VideosGet(ctx _context.Context, localVarOptionals *
 	)
 
 	// create path and map variables
-	localVarPath := a.client.cfg.BasePath + "/v1/videos"
+	localVarPath := a.client.cfg.BasePath + "/videos"
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
@@ -127,13 +127,13 @@ func (a *VideosApiService) V1VideosGet(ctx _context.Context, localVarOptionals *
 }
 
 /*
-V1VideosIdDelete Delete a video
+VideosIdDelete Delete a video
 Delete one video
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param id Video ID
 @return HttputilsDataResponse
 */
-func (a *VideosApiService) V1VideosIdDelete(ctx _context.Context, id string) (HttputilsDataResponse, *_nethttp.Response, error) {
+func (a *VideosApiService) VideosIdDelete(ctx _context.Context, id string) (HttputilsDataResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
 		localVarPostBody     interface{}
@@ -144,7 +144,7 @@ func (a *VideosApiService) V1VideosIdDelete(ctx _context.Context, id string) (Ht
 	)
 
 	// create path and map variables
-	localVarPath := a.client.cfg.BasePath + "/v1/videos/{id}"
+	localVarPath := a.client.cfg.BasePath + "/videos/{id}"
 	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", _neturl.QueryEscape(parameterToString(id, "")) , -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -205,6 +205,16 @@ func (a *VideosApiService) V1VideosIdDelete(ctx _context.Context, id string) (Ht
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v HttputilsErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
 		if localVarHTTPResponse.StatusCode == 500 {
 			var v HttputilsErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
@@ -230,13 +240,13 @@ func (a *VideosApiService) V1VideosIdDelete(ctx _context.Context, id string) (Ht
 }
 
 /*
-V1VideosIdGet Get a video
+VideosIdGet Get a video
 get one video
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param id Video ID
 @return InlineResponse2001
 */
-func (a *VideosApiService) V1VideosIdGet(ctx _context.Context, id string) (InlineResponse2001, *_nethttp.Response, error) {
+func (a *VideosApiService) VideosIdGet(ctx _context.Context, id string) (InlineResponse2001, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
@@ -247,7 +257,7 @@ func (a *VideosApiService) V1VideosIdGet(ctx _context.Context, id string) (Inlin
 	)
 
 	// create path and map variables
-	localVarPath := a.client.cfg.BasePath + "/v1/videos/{id}"
+	localVarPath := a.client.cfg.BasePath + "/videos/{id}"
 	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", _neturl.QueryEscape(parameterToString(id, "")) , -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -333,14 +343,14 @@ func (a *VideosApiService) V1VideosIdGet(ctx _context.Context, id string) (Inlin
 }
 
 /*
-V1VideosIdPatch Update a video
+VideosIdPatch Update a video
 Update an existing video
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param id Video ID
  * @param title Video title
 @return InlineResponse2001
 */
-func (a *VideosApiService) V1VideosIdPatch(ctx _context.Context, id string, title string) (InlineResponse2001, *_nethttp.Response, error) {
+func (a *VideosApiService) VideosIdPatch(ctx _context.Context, id string, title string) (InlineResponse2001, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
@@ -351,7 +361,7 @@ func (a *VideosApiService) V1VideosIdPatch(ctx _context.Context, id string, titl
 	)
 
 	// create path and map variables
-	localVarPath := a.client.cfg.BasePath + "/v1/videos/{id}"
+	localVarPath := a.client.cfg.BasePath + "/videos/{id}"
 	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", _neturl.QueryEscape(parameterToString(id, "")) , -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -414,6 +424,16 @@ func (a *VideosApiService) V1VideosIdPatch(ctx _context.Context, id string, titl
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v HttputilsErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
 		if localVarHTTPResponse.StatusCode == 500 {
 			var v HttputilsErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
@@ -439,14 +459,14 @@ func (a *VideosApiService) V1VideosIdPatch(ctx _context.Context, id string, titl
 }
 
 /*
-V1VideosIdUploadPost Upload a video file
+VideosIdUploadPost Upload a video file
 Upload a new video file for a given video ID
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param id Video ID
  * @param file Video file
 @return InlineResponse2001
 */
-func (a *VideosApiService) V1VideosIdUploadPost(ctx _context.Context, id string, file *os.File) (InlineResponse2001, *_nethttp.Response, error) {
+func (a *VideosApiService) VideosIdUploadPost(ctx _context.Context, id string, file *os.File) (InlineResponse2001, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
@@ -457,7 +477,7 @@ func (a *VideosApiService) V1VideosIdUploadPost(ctx _context.Context, id string,
 	)
 
 	// create path and map variables
-	localVarPath := a.client.cfg.BasePath + "/v1/videos/{id}/upload"
+	localVarPath := a.client.cfg.BasePath + "/videos/{id}/upload"
 	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", _neturl.QueryEscape(parameterToString(id, "")) , -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -561,13 +581,13 @@ func (a *VideosApiService) V1VideosIdUploadPost(ctx _context.Context, id string,
 }
 
 /*
-V1VideosPost Create a video
+VideosPost Create a video
 Create a new video
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param title Video title
 @return InlineResponse2001
 */
-func (a *VideosApiService) V1VideosPost(ctx _context.Context, title string) (InlineResponse2001, *_nethttp.Response, error) {
+func (a *VideosApiService) VideosPost(ctx _context.Context, title string) (InlineResponse2001, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
@@ -578,7 +598,7 @@ func (a *VideosApiService) V1VideosPost(ctx _context.Context, title string) (Inl
 	)
 
 	// create path and map variables
-	localVarPath := a.client.cfg.BasePath + "/v1/videos"
+	localVarPath := a.client.cfg.BasePath + "/videos"
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}

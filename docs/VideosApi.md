@@ -4,18 +4,18 @@ All URIs are relative to *http://localhost:8080*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**V1VideosGet**](VideosApi.md#V1VideosGet) | **Get** /v1/videos | Query videos
-[**V1VideosIdDelete**](VideosApi.md#V1VideosIdDelete) | **Delete** /v1/videos/{id} | Delete a video
-[**V1VideosIdGet**](VideosApi.md#V1VideosIdGet) | **Get** /v1/videos/{id} | Get a video
-[**V1VideosIdPatch**](VideosApi.md#V1VideosIdPatch) | **Patch** /v1/videos/{id} | Update a video
-[**V1VideosIdUploadPost**](VideosApi.md#V1VideosIdUploadPost) | **Post** /v1/videos/{id}/upload | Upload a video file
-[**V1VideosPost**](VideosApi.md#V1VideosPost) | **Post** /v1/videos | Create a video
+[**VideosGet**](VideosApi.md#VideosGet) | **Get** /videos | Query videos
+[**VideosIdDelete**](VideosApi.md#VideosIdDelete) | **Delete** /videos/{id} | Delete a video
+[**VideosIdGet**](VideosApi.md#VideosIdGet) | **Get** /videos/{id} | Get a video
+[**VideosIdPatch**](VideosApi.md#VideosIdPatch) | **Patch** /videos/{id} | Update a video
+[**VideosIdUploadPost**](VideosApi.md#VideosIdUploadPost) | **Post** /videos/{id}/upload | Upload a video file
+[**VideosPost**](VideosApi.md#VideosPost) | **Post** /videos | Create a video
 
 
 
-## V1VideosGet
+## VideosGet
 
-> InlineResponse200 V1VideosGet(ctx, optional)
+> InlineResponse200 VideosGet(ctx, optional)
 
 Query videos
 
@@ -27,11 +27,11 @@ get latest videos
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
- **optional** | ***V1VideosGetOpts** | optional parameters | nil if no parameters
+ **optional** | ***VideosGetOpts** | optional parameters | nil if no parameters
 
 ### Optional Parameters
 
-Optional parameters are passed through a pointer to a V1VideosGetOpts struct
+Optional parameters are passed through a pointer to a VideosGetOpts struct
 
 
 Name | Type | Description  | Notes
@@ -57,9 +57,9 @@ No authorization required
 [[Back to README]](../README.md)
 
 
-## V1VideosIdDelete
+## VideosIdDelete
 
-> HttputilsDataResponse V1VideosIdDelete(ctx, id)
+> HttputilsDataResponse VideosIdDelete(ctx, id)
 
 Delete a video
 
@@ -91,9 +91,9 @@ No authorization required
 [[Back to README]](../README.md)
 
 
-## V1VideosIdGet
+## VideosIdGet
 
-> InlineResponse2001 V1VideosIdGet(ctx, id)
+> InlineResponse2001 VideosIdGet(ctx, id)
 
 Get a video
 
@@ -125,9 +125,9 @@ No authorization required
 [[Back to README]](../README.md)
 
 
-## V1VideosIdPatch
+## VideosIdPatch
 
-> InlineResponse2001 V1VideosIdPatch(ctx, id, title)
+> InlineResponse2001 VideosIdPatch(ctx, id, title)
 
 Update a video
 
@@ -160,9 +160,9 @@ No authorization required
 [[Back to README]](../README.md)
 
 
-## V1VideosIdUploadPost
+## VideosIdUploadPost
 
-> InlineResponse2001 V1VideosIdUploadPost(ctx, id, file)
+> InlineResponse2001 VideosIdUploadPost(ctx, id, file)
 
 Upload a video file
 
@@ -195,9 +195,9 @@ No authorization required
 [[Back to README]](../README.md)
 
 
-## V1VideosPost
+## VideosPost
 
-> InlineResponse2001 V1VideosPost(ctx, title)
+> InlineResponse2001 VideosPost(ctx, title)
 
 Create a video
 
