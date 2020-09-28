@@ -8,17 +8,21 @@ jobs:
   build:
     name: Build
     runs-on: ubuntu-latest
+    env:
+      ORGANIZATION: dreamvo
+      REPOSITORY: go-gilfoyle
+      CODEGEN_LANG: go
     steps:
 
-    - name: Check out code into the Go module directory
+    - name: Check out code from the repository
       uses: actions/checkout@v2
 
     - name: Generate client
       run: |
-          git remote set-url origin https://dreamvo:${{ secrets.GITHUB_TOKEN }}@github.com/dreamvo/go-gilfoyle.git
-          git config --global user.name dreamvo
-          git config --global user.email dreamvo@users.noreply.github.com
-          docker run --rm -v ${PWD}:/app swaggerapi/swagger-codegen-cli generate -i https://raw.githubusercontent.com/dreamvo/gilfoyle/master/api/docs/swagger.json -l go -o /app
+          git remote set-url origin "https://$ORGANIZATION:${{ secrets.GITHUB_TOKEN }}@github.com/$ORGANIZATION/$REPOSITORY.git"
+          git config --global user.name "$ORGANIZATION"
+          git config --global user.email "$ORGANIZATION@users.noreply.github.com"
+          docker run --rm -v ${PWD}:/app swaggerapi/swagger-codegen-cli generate -i https://raw.githubusercontent.com/dreamvo/gilfoyle/master/api/docs/swagger.json -l $CODEGEN_LANG -o /app
           if [[ -z $(git status -s) ]]
           then
             echo "tree is clean, exiting"
