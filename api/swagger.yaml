@@ -1,0 +1,307 @@
+---
+swagger: "2.0"
+info:
+  description: "Video streaming server backed by decentralized filesystem."
+  version: "0.1-beta"
+  title: "Gilfoyle server"
+  contact: {}
+  license:
+    name: "GNU General Public License v3.0"
+    url: "https://github.com/dreamvo/gilfoyle/blob/master/LICENSE"
+host: "localhost:8080"
+basePath: "/"
+schemes:
+- "http"
+- "https"
+paths:
+  /health:
+    get:
+      tags:
+      - "health"
+      summary: "Check service status"
+      parameters: []
+      responses:
+        "200": {}
+  /v1/videos:
+    get:
+      tags:
+      - "videos"
+      summary: "Query videos"
+      description: "get latest videos"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "limit"
+        in: "query"
+        description: "Max number of results"
+        required: false
+        type: "integer"
+        x-exportParamName: "Limit"
+        x-optionalDataType: "Int32"
+      - name: "offset"
+        in: "query"
+        description: "Number of results to ignore"
+        required: false
+        type: "integer"
+        x-exportParamName: "Offset"
+        x-optionalDataType: "Int32"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            $ref: "#/definitions/inline_response_200"
+        "500":
+          description: "Internal Server Error"
+          schema:
+            $ref: "#/definitions/httputils.ErrorResponse"
+    post:
+      tags:
+      - "videos"
+      summary: "Create a video"
+      description: "Create a new video"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "title"
+        description: "Video title"
+        required: true
+        schema:
+          type: "string"
+        x-exportParamName: "Title"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            $ref: "#/definitions/inline_response_200_1"
+        "400":
+          description: "Bad Request"
+          schema:
+            $ref: "#/definitions/httputils.ErrorResponse"
+        "500":
+          description: "Internal Server Error"
+          schema:
+            $ref: "#/definitions/httputils.ErrorResponse"
+  /v1/videos/{id}:
+    get:
+      tags:
+      - "videos"
+      summary: "Get a video"
+      description: "get one video"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "Video ID"
+        required: true
+        type: "string"
+        maxLength: 36
+        minLength: 36
+        x-exportParamName: "Id"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            $ref: "#/definitions/inline_response_200_1"
+        "404":
+          description: "Not Found"
+          schema:
+            $ref: "#/definitions/httputils.ErrorResponse"
+        "500":
+          description: "Internal Server Error"
+          schema:
+            $ref: "#/definitions/httputils.ErrorResponse"
+    delete:
+      tags:
+      - "videos"
+      summary: "Delete a video"
+      description: "Delete one video"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "Video ID"
+        required: true
+        type: "string"
+        maxLength: 36
+        minLength: 36
+        x-exportParamName: "Id"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            $ref: "#/definitions/httputils.DataResponse"
+        "400":
+          description: "Bad Request"
+          schema:
+            $ref: "#/definitions/httputils.ErrorResponse"
+        "500":
+          description: "Internal Server Error"
+          schema:
+            $ref: "#/definitions/httputils.ErrorResponse"
+    patch:
+      tags:
+      - "videos"
+      summary: "Update a video"
+      description: "Update an existing video"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "Video ID"
+        required: true
+        type: "string"
+        maxLength: 36
+        minLength: 36
+        x-exportParamName: "Id"
+      - in: "body"
+        name: "title"
+        description: "Video title"
+        required: true
+        schema:
+          type: "string"
+        x-exportParamName: "Title"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            $ref: "#/definitions/inline_response_200_1"
+        "400":
+          description: "Bad Request"
+          schema:
+            $ref: "#/definitions/httputils.ErrorResponse"
+        "500":
+          description: "Internal Server Error"
+          schema:
+            $ref: "#/definitions/httputils.ErrorResponse"
+  /v1/videos/{id}/upload:
+    post:
+      tags:
+      - "videos"
+      summary: "Upload a video file"
+      description: "Upload a new video file for a given video ID"
+      consumes:
+      - "multipart/form-data"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "Video ID"
+        required: true
+        type: "string"
+        maxLength: 36
+        minLength: 36
+        x-exportParamName: "Id"
+      - name: "file"
+        in: "formData"
+        description: "Video file"
+        required: true
+        type: "file"
+        x-exportParamName: "File"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            $ref: "#/definitions/inline_response_200_1"
+        "400":
+          description: "Bad Request"
+          schema:
+            $ref: "#/definitions/httputils.ErrorResponse"
+        "404":
+          description: "Not Found"
+          schema:
+            $ref: "#/definitions/httputils.ErrorResponse"
+        "500":
+          description: "Internal Server Error"
+          schema:
+            $ref: "#/definitions/httputils.ErrorResponse"
+definitions:
+  ent.Video:
+    type: "object"
+    properties:
+      created_at:
+        type: "string"
+      id:
+        type: "string"
+      status:
+        type: "string"
+      title:
+        type: "string"
+      updated_at:
+        type: "string"
+    example:
+      updated_at: "updated_at"
+      created_at: "created_at"
+      id: "id"
+      title: "title"
+      status: "status"
+  httputils.DataResponse:
+    type: "object"
+    properties:
+      code:
+        type: "integer"
+        example: 200
+      data:
+        type: "object"
+        properties: {}
+    example:
+      code: 200
+      data: "{}"
+  httputils.ErrorResponse:
+    type: "object"
+    properties:
+      code:
+        type: "integer"
+        example: 400
+      message:
+        type: "string"
+        example: "status bad request"
+  inline_response_200:
+    type: "object"
+    properties:
+      data:
+        type: "array"
+        items:
+          $ref: "#/definitions/ent.Video"
+      httputils.DataResponse:
+        $ref: "#/definitions/httputils.DataResponse"
+    example:
+      data:
+      - updated_at: "updated_at"
+        created_at: "created_at"
+        id: "id"
+        title: "title"
+        status: "status"
+      - updated_at: "updated_at"
+        created_at: "created_at"
+        id: "id"
+        title: "title"
+        status: "status"
+      httputils.DataResponse:
+        code: 200
+        data: "{}"
+  inline_response_200_1:
+    type: "object"
+    properties:
+      data:
+        $ref: "#/definitions/ent.Video"
+      httputils.DataResponse:
+        $ref: "#/definitions/httputils.DataResponse"
+    example:
+      data:
+        updated_at: "updated_at"
+        created_at: "created_at"
+        id: "id"
+        title: "title"
+        status: "status"
+      httputils.DataResponse:
+        code: 200
+        data: "{}"
