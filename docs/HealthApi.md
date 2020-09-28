@@ -7,15 +7,11 @@ Method | HTTP request | Description
 [**HealthGet**](HealthApi.md#HealthGet) | **Get** /health | Check service status
 
 
-
-## HealthGet
-
+# **HealthGet**
 > HealthGet(ctx, )
-
 Check service status
 
 ### Required Parameters
-
 This endpoint does not need any parameter.
 
 ### Return type
@@ -28,10 +24,8 @@ No authorization required
 
 ### HTTP request headers
 
-- **Content-Type**: Not defined
-- **Accept**: Not defined
+ - **Content-Type**: Not defined
+ - **Accept**: Not defined
 
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
