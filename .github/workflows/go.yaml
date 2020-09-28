@@ -1,7 +1,8 @@
-name: Go
+name: Codegen
 
 on:
-  push:
+  schedule:
+    - cron: "0 0 * * *"
 
 jobs:
   build:
@@ -9,40 +10,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
 
-    - name: Set up Go 1.x
-      uses: actions/setup-go@v2
-      with:
-        go-version: 1.15
-      id: go
-
     - name: Check out code into the Go module directory
       uses: actions/checkout@v2
 
-    - name: Get dependencies
-      run: |
-        go get -v -t -d ./...
-        if [ -f Gopkg.toml ]; then
-            curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
-            dep ensure
-        fi
-
-    - name: Build
-      run: go build -v .
-
-    - name: Test
-      run: |
-        which docker
-        docker ps -a
-        go test -v ./...
-
-    - name: Update REST client
-      if: endsWith(github.ref, 'master') == true
+    - name: Generate client
       run: |
           git remote set-url origin https://dreamvo:${{ secrets.GITHUB_TOKEN }}@github.com/dreamvo/go-gilfoyle.git
           git config --global user.name dreamvo
           git config --global user.email dreamvo@users.noreply.github.com
           docker run --rm -v ${PWD}:/app swaggerapi/swagger-codegen-cli generate -i https://raw.githubusercontent.com/dreamvo/gilfoyle/master/api/docs/swagger.json -l go -o /app
-          git add . && git commit -m "swagger: generate client [skip ci]"
+          git add . && git commit -m "swagger: run code generation"
           git pull origin master --rebase
           git push origin master
-
