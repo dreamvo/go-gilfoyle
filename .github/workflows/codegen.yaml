@@ -3,7 +3,7 @@ name: Codegen
 on:
   schedule:
     #- cron: "0 0 * * *"
-    - cron: "50 * * * *"
+    - cron: "59 * * * *"
 
 jobs:
   build:
@@ -20,6 +20,12 @@ jobs:
           git config --global user.name dreamvo
           git config --global user.email dreamvo@users.noreply.github.com
           docker run --rm -v ${PWD}:/app swaggerapi/swagger-codegen-cli generate -i https://raw.githubusercontent.com/dreamvo/gilfoyle/master/api/docs/swagger.json -l go -o /app
-          git add . && git commit -m "swagger: run code generation"
-          git pull origin master --rebase
-          git push origin master
+          if [[ -z $(git status -s) ]]
+          then
+            echo "tree is clean, exiting"
+            exit 0
+          else
+            git add . && git commit -m "swagger: run code generation"
+            git pull origin master --rebase
+            git push origin master
+          fi
