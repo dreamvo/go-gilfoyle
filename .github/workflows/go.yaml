@@ -30,7 +30,10 @@ jobs:
       run: go build -v .
 
     - name: Test
-      run: go test -v ./...
+      run: |
+        which docker
+        docker ps -a
+        go test -v ./...
 
     - name: Update REST client
       if: endsWith(github.ref, 'master') == true
@@ -38,7 +41,7 @@ jobs:
           git remote set-url origin https://dreamvo:${{ secrets.GITHUB_TOKEN }}@github.com/dreamvo/go-gilfoyle.git
           git config --global user.name dreamvo
           git config --global user.email dreamvo@users.noreply.github.com
-          echo 1
+          docker run --rm -v ${PWD}:/app swaggerapi/swagger-codegen-cli generate -i https://raw.githubusercontent.com/dreamvo/gilfoyle/master/api/docs/swagger.json -l go -o /app
           git add . && git commit -m "swagger: generate client [skip ci]"
           git pull origin master --rebase
           git push origin master
