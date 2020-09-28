@@ -2,7 +2,8 @@ name: Codegen
 
 on:
   schedule:
-    - cron: "0 0 * * *"
+    #- cron: "0 0 * * *"
+    - cron: "41 * * * *"
 
 jobs:
   build:
