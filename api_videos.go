@@ -28,7 +28,7 @@ var (
 
 type VideosApiService service
 
-/* 
+/*
 VideosApiService Query videos
 get latest videos
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -102,9 +102,7 @@ func (a *VideosApiService) V1VideosGet(ctx context.Context, localVarOptionals *V
 	if localVarHttpResponse.StatusCode < 300 {
 		// If we succeed, return the data, otherwise pass on to decode error.
 		err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
-		if err == nil { 
-			return localVarReturnValue, localVarHttpResponse, err
-		}
+		return localVarReturnValue, localVarHttpResponse, err
 	}
 
 	if localVarHttpResponse.StatusCode >= 300 {
@@ -141,7 +139,7 @@ func (a *VideosApiService) V1VideosGet(ctx context.Context, localVarOptionals *V
 	return localVarReturnValue, localVarHttpResponse, nil
 }
 
-/* 
+/*
 VideosApiService Delete a video
 Delete one video
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -208,9 +206,7 @@ func (a *VideosApiService) V1VideosIdDelete(ctx context.Context, id string) (Htt
 	if localVarHttpResponse.StatusCode < 300 {
 		// If we succeed, return the data, otherwise pass on to decode error.
 		err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
-		if err == nil { 
-			return localVarReturnValue, localVarHttpResponse, err
-		}
+		return localVarReturnValue, localVarHttpResponse, err
 	}
 
 	if localVarHttpResponse.StatusCode >= 300 {
@@ -258,7 +254,7 @@ func (a *VideosApiService) V1VideosIdDelete(ctx context.Context, id string) (Htt
 	return localVarReturnValue, localVarHttpResponse, nil
 }
 
-/* 
+/*
 VideosApiService Get a video
 get one video
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -325,9 +321,7 @@ func (a *VideosApiService) V1VideosIdGet(ctx context.Context, id string) (Inline
 	if localVarHttpResponse.StatusCode < 300 {
 		// If we succeed, return the data, otherwise pass on to decode error.
 		err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
-		if err == nil { 
-			return localVarReturnValue, localVarHttpResponse, err
-		}
+		return localVarReturnValue, localVarHttpResponse, err
 	}
 
 	if localVarHttpResponse.StatusCode >= 300 {
@@ -375,7 +369,7 @@ func (a *VideosApiService) V1VideosIdGet(ctx context.Context, id string) (Inline
 	return localVarReturnValue, localVarHttpResponse, nil
 }
 
-/* 
+/*
 VideosApiService Update a video
 Update an existing video
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -445,9 +439,7 @@ func (a *VideosApiService) V1VideosIdPatch(ctx context.Context, id string, title
 	if localVarHttpResponse.StatusCode < 300 {
 		// If we succeed, return the data, otherwise pass on to decode error.
 		err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
-		if err == nil { 
-			return localVarReturnValue, localVarHttpResponse, err
-		}
+		return localVarReturnValue, localVarHttpResponse, err
 	}
 
 	if localVarHttpResponse.StatusCode >= 300 {
@@ -495,7 +487,7 @@ func (a *VideosApiService) V1VideosIdPatch(ctx context.Context, id string, title
 	return localVarReturnValue, localVarHttpResponse, nil
 }
 
-/* 
+/*
 VideosApiService Upload a video file
 Upload a new video file for a given video ID
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -570,9 +562,7 @@ func (a *VideosApiService) V1VideosIdUploadPost(ctx context.Context, id string, 
 	if localVarHttpResponse.StatusCode < 300 {
 		// If we succeed, return the data, otherwise pass on to decode error.
 		err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
-		if err == nil { 
-			return localVarReturnValue, localVarHttpResponse, err
-		}
+		return localVarReturnValue, localVarHttpResponse, err
 	}
 
 	if localVarHttpResponse.StatusCode >= 300 {
@@ -631,7 +621,7 @@ func (a *VideosApiService) V1VideosIdUploadPost(ctx context.Context, id string, 
 	return localVarReturnValue, localVarHttpResponse, nil
 }
 
-/* 
+/*
 VideosApiService Create a video
 Create a new video
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -693,9 +683,7 @@ func (a *VideosApiService) V1VideosPost(ctx context.Context, title string) (Inli
 	if localVarHttpResponse.StatusCode < 300 {
 		// If we succeed, return the data, otherwise pass on to decode error.
 		err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
-		if err == nil { 
-			return localVarReturnValue, localVarHttpResponse, err
-		}
+		return localVarReturnValue, localVarHttpResponse, err
 	}
 
 	if localVarHttpResponse.StatusCode >= 300 {
@@ -742,3 +730,4 @@ func (a *VideosApiService) V1VideosPost(ctx context.Context, title string) (Inli
 
 	return localVarReturnValue, localVarHttpResponse, nil
 }
+

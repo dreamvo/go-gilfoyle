@@ -25,7 +25,7 @@ var (
 
 type HealthApiService service
 
-/* 
+/*
 HealthApiService Check service status
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 
@@ -92,3 +92,4 @@ func (a *HealthApiService) HealthGet(ctx context.Context) (*http.Response, error
 
 	return localVarHttpResponse, nil
 }
+
