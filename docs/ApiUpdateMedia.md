@@ -1,10 +1,9 @@
-# InlineResponse2001
+# ApiUpdateMedia
 
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Data** | [***EntMedia**](ent.Media.md) |  | [optional] [default to null]
-**HttputilsDataResponse** | [***HttputilsDataResponse**](httputils.DataResponse.md) |  | [optional] [default to null]
+**Title** | **string** |  | [default to null]
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

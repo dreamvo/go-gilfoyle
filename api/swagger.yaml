@@ -1,14 +1,14 @@
 ---
 swagger: "2.0"
 info:
-  description: "Video streaming server backed by decentralized filesystem."
+  description: "Media streaming server backed by decentralized filesystem."
   version: "0.1-beta"
   title: "Gilfoyle server"
   contact: {}
   license:
     name: "GNU General Public License v3.0"
     url: "https://github.com/dreamvo/gilfoyle/blob/master/LICENSE"
-host: "localhost:8080"
+host: "demo-v1.gilfoyle.dreamvo.com"
 basePath: "/"
 schemes:
 - "http"
@@ -19,15 +19,23 @@ paths:
       tags:
       - "health"
       summary: "Check service status"
+      description: "Check for the health of the service"
+      operationId: "checkHealth"
+      produces:
+      - "application/json"
       parameters: []
       responses:
-        "200": {}
-  /v1/videos:
+        "200":
+          description: "OK"
+          schema:
+            type: "object"
+  /medias:
     get:
       tags:
-      - "videos"
-      summary: "Query videos"
-      description: "get latest videos"
+      - "Medias"
+      summary: "Query medias"
+      description: "Get latest created medias"
+      operationId: "getAllMedias"
       produces:
       - "application/json"
       parameters:
@@ -56,21 +64,22 @@ paths:
             $ref: "#/definitions/httputils.ErrorResponse"
     post:
       tags:
-      - "videos"
-      summary: "Create a video"
-      description: "Create a new video"
+      - "Medias"
+      summary: "Create a media"
+      description: "Create a new media"
+      operationId: "createMedia"
       consumes:
       - "application/json"
       produces:
       - "application/json"
       parameters:
       - in: "body"
-        name: "title"
-        description: "Video title"
+        name: "media"
+        description: "Media data"
         required: true
         schema:
-          type: "string"
-        x-exportParamName: "Title"
+          $ref: "#/definitions/api.CreateMedia"
+        x-exportParamName: "Media"
       responses:
         "200":
           description: "OK"
@@ -84,22 +93,21 @@ paths:
           description: "Internal Server Error"
           schema:
             $ref: "#/definitions/httputils.ErrorResponse"
-  /v1/videos/{id}:
+  /medias/{id}:
     get:
       tags:
-      - "videos"
-      summary: "Get a video"
-      description: "get one video"
+      - "Medias"
+      summary: "Get a media"
+      description: "Get one media"
+      operationId: "getMedia"
       produces:
       - "application/json"
       parameters:
       - name: "id"
         in: "path"
-        description: "Video ID"
+        description: "Media ID"
         required: true
         type: "string"
-        maxLength: 36
-        minLength: 36
         x-exportParamName: "Id"
       responses:
         "200":
@@ -116,19 +124,18 @@ paths:
             $ref: "#/definitions/httputils.ErrorResponse"
     delete:
       tags:
-      - "videos"
-      summary: "Delete a video"
-      description: "Delete one video"
+      - "Medias"
+      summary: "Delete a media"
+      description: "Delete one media"
+      operationId: "deleteMedia"
       produces:
       - "application/json"
       parameters:
       - name: "id"
         in: "path"
-        description: "Video ID"
+        description: "Media ID"
         required: true
         type: "string"
-        maxLength: 36
-        minLength: 36
         x-exportParamName: "Id"
       responses:
         "200":
@@ -139,15 +146,20 @@ paths:
           description: "Bad Request"
           schema:
             $ref: "#/definitions/httputils.ErrorResponse"
+        "404":
+          description: "Not Found"
+          schema:
+            $ref: "#/definitions/httputils.ErrorResponse"
         "500":
           description: "Internal Server Error"
           schema:
             $ref: "#/definitions/httputils.ErrorResponse"
     patch:
       tags:
-      - "videos"
-      summary: "Update a video"
-      description: "Update an existing video"
+      - "Medias"
+      summary: "Update a media"
+      description: "Update an existing media"
+      operationId: "updateMedia"
       consumes:
       - "application/json"
       produces:
@@ -155,19 +167,17 @@ paths:
       parameters:
       - name: "id"
         in: "path"
-        description: "Video ID"
+        description: "Media ID"
         required: true
         type: "string"
-        maxLength: 36
-        minLength: 36
         x-exportParamName: "Id"
       - in: "body"
-        name: "title"
-        description: "Video title"
+        name: "media"
+        description: "Media data"
         required: true
         schema:
-          type: "string"
-        x-exportParamName: "Title"
+          $ref: "#/definitions/api.UpdateMedia"
+        x-exportParamName: "Media"
       responses:
         "200":
           description: "OK"
@@ -177,16 +187,21 @@ paths:
           description: "Bad Request"
           schema:
             $ref: "#/definitions/httputils.ErrorResponse"
+        "404":
+          description: "Not Found"
+          schema:
+            $ref: "#/definitions/httputils.ErrorResponse"
         "500":
           description: "Internal Server Error"
           schema:
             $ref: "#/definitions/httputils.ErrorResponse"
-  /v1/videos/{id}/upload:
+  /medias/{id}/upload:
     post:
       tags:
-      - "videos"
-      summary: "Upload a video file"
-      description: "Upload a new video file for a given video ID"
+      - "Medias"
+      summary: "Upload a media file"
+      description: "Upload a new media file for a given media ID"
+      operationId: "uploadMediaFile"
       consumes:
       - "multipart/form-data"
       produces:
@@ -194,15 +209,13 @@ paths:
       parameters:
       - name: "id"
         in: "path"
-        description: "Video ID"
+        description: "Media identifier"
         required: true
         type: "string"
-        maxLength: 36
-        minLength: 36
         x-exportParamName: "Id"
       - name: "file"
         in: "formData"
-        description: "Video file"
+        description: "Media file"
         required: true
         type: "file"
         x-exportParamName: "File"
@@ -224,7 +237,23 @@ paths:
           schema:
             $ref: "#/definitions/httputils.ErrorResponse"
 definitions:
-  ent.Video:
+  api.CreateMedia:
+    type: "object"
+    required:
+    - "title"
+    properties:
+      title:
+        type: "string"
+        example: "Sheep Discovers How To Use A Trampoline"
+  api.UpdateMedia:
+    type: "object"
+    required:
+    - "title"
+    properties:
+      title:
+        type: "string"
+        example: "Sheep Discovers How To Use A Trampoline"
+  ent.Media:
     type: "object"
     properties:
       created_at:
@@ -270,7 +299,7 @@ definitions:
       data:
         type: "array"
         items:
-          $ref: "#/definitions/ent.Video"
+          $ref: "#/definitions/ent.Media"
       httputils.DataResponse:
         $ref: "#/definitions/httputils.DataResponse"
     example:
@@ -292,7 +321,7 @@ definitions:
     type: "object"
     properties:
       data:
-        $ref: "#/definitions/ent.Video"
+        $ref: "#/definitions/ent.Media"
       httputils.DataResponse:
         $ref: "#/definitions/httputils.DataResponse"
     example:

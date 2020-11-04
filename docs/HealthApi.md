@@ -1,22 +1,24 @@
 # \HealthApi
 
-All URIs are relative to *http://localhost:8080*
+All URIs are relative to *http://demo-v1.gilfoyle.dreamvo.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**HealthGet**](HealthApi.md#HealthGet) | **Get** /health | Check service status
+[**CheckHealth**](HealthApi.md#CheckHealth) | **Get** /health | Check service status
 
 
-# **HealthGet**
-> HealthGet(ctx, )
+# **CheckHealth**
+> interface{} CheckHealth(ctx, )
 Check service status
+
+Check for the health of the service
 
 ### Required Parameters
 This endpoint does not need any parameter.
 
 ### Return type
 
- (empty response body)
+[**interface{}**](interface{}.md)
 
 ### Authorization
 
@@ -25,7 +27,7 @@ No authorization required
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

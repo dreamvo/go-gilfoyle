@@ -9,7 +9,6 @@
 
 package swagger
 
-type InlineResponse200 struct {
-	Data []EntMedia `json:"data,omitempty"`
-	HttputilsDataResponse *HttputilsDataResponse `json:"httputils.DataResponse,omitempty"`
+type ApiUpdateMedia struct {
+	Title string `json:"title"`
 }
