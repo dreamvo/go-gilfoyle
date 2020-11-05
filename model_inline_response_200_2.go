@@ -9,6 +9,7 @@
 
 package swagger
 
-type ApiCreateMedia struct {
-	Title string `json:"title"`
+type InlineResponse2002 struct {
+	Data *EntMedia `json:"data,omitempty"`
+	HttputilsDataResponse *HttputilsDataResponse `json:"httputils.DataResponse,omitempty"`
 }

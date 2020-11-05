@@ -9,6 +9,7 @@
 
 package swagger
 
-type ApiCreateMedia struct {
-	Title string `json:"title"`
+type ApiHealthCheckResponse struct {
+	Commit string `json:"commit,omitempty"`
+	Tag string `json:"tag,omitempty"`
 }

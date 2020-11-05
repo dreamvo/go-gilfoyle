@@ -1,10 +1,10 @@
-# InlineResponse2001
+# ApiHealthCheckResponse
 
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Data** | [**[]EntMedia**](ent.Media.md) |  | [optional] [default to null]
-**HttputilsDataResponse** | [***HttputilsDataResponse**](httputils.DataResponse.md) |  | [optional] [default to null]
+**Commit** | **string** |  | [optional] [default to null]
+**Tag** | **string** |  | [optional] [default to null]
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

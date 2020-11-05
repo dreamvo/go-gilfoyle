@@ -1,8 +1,8 @@
 ---
 swagger: "2.0"
 info:
-  description: "Media streaming server backed by decentralized filesystem."
-  version: "0.1-beta"
+  description: "Cloud-native media hosting & streaming server for businesses."
+  version: "v1"
   title: "Gilfoyle server"
   contact: {}
   license:
@@ -28,7 +28,7 @@ paths:
         "200":
           description: "OK"
           schema:
-            type: "object"
+            $ref: "#/definitions/inline_response_200"
   /medias:
     get:
       tags:
@@ -57,7 +57,7 @@ paths:
         "200":
           description: "OK"
           schema:
-            $ref: "#/definitions/inline_response_200"
+            $ref: "#/definitions/inline_response_200_1"
         "500":
           description: "Internal Server Error"
           schema:
@@ -84,7 +84,7 @@ paths:
         "200":
           description: "OK"
           schema:
-            $ref: "#/definitions/inline_response_200_1"
+            $ref: "#/definitions/inline_response_200_2"
         "400":
           description: "Bad Request"
           schema:
@@ -113,7 +113,7 @@ paths:
         "200":
           description: "OK"
           schema:
-            $ref: "#/definitions/inline_response_200_1"
+            $ref: "#/definitions/inline_response_200_2"
         "404":
           description: "Not Found"
           schema:
@@ -182,7 +182,7 @@ paths:
         "200":
           description: "OK"
           schema:
-            $ref: "#/definitions/inline_response_200_1"
+            $ref: "#/definitions/inline_response_200_2"
         "400":
           description: "Bad Request"
           schema:
@@ -223,7 +223,7 @@ paths:
         "200":
           description: "OK"
           schema:
-            $ref: "#/definitions/inline_response_200_1"
+            $ref: "#/definitions/inline_response_200_2"
         "400":
           description: "Bad Request"
           schema:
@@ -245,6 +245,16 @@ definitions:
       title:
         type: "string"
         example: "Sheep Discovers How To Use A Trampoline"
+  api.HealthCheckResponse:
+    type: "object"
+    properties:
+      commit:
+        type: "string"
+      tag:
+        type: "string"
+    example:
+      commit: "commit"
+      tag: "tag"
   api.UpdateMedia:
     type: "object"
     required:
@@ -297,6 +307,20 @@ definitions:
     type: "object"
     properties:
       data:
+        $ref: "#/definitions/api.HealthCheckResponse"
+      httputils.DataResponse:
+        $ref: "#/definitions/httputils.DataResponse"
+    example:
+      data:
+        commit: "commit"
+        tag: "tag"
+      httputils.DataResponse:
+        code: 200
+        data: "{}"
+  inline_response_200_1:
+    type: "object"
+    properties:
+      data:
         type: "array"
         items:
           $ref: "#/definitions/ent.Media"
@@ -317,7 +341,7 @@ definitions:
       httputils.DataResponse:
         code: 200
         data: "{}"
-  inline_response_200_1:
+  inline_response_200_2:
     type: "object"
     properties:
       data:

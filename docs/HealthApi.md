@@ -8,7 +8,7 @@ Method | HTTP request | Description
 
 
 # **CheckHealth**
-> interface{} CheckHealth(ctx, )
+> InlineResponse200 CheckHealth(ctx, )
 Check service status
 
 Check for the health of the service
@@ -18,7 +18,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**interface{}**](interface{}.md)
+[**InlineResponse200**](inline_response_200.md)
 
 ### Authorization
 

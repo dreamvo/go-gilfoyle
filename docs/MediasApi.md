@@ -13,7 +13,7 @@ Method | HTTP request | Description
 
 
 # **CreateMedia**
-> InlineResponse2001 CreateMedia(ctx, media)
+> InlineResponse2002 CreateMedia(ctx, media)
 Create a media
 
 Create a new media
@@ -27,7 +27,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse2001**](inline_response_200_1.md)
+[**InlineResponse2002**](inline_response_200_2.md)
 
 ### Authorization
 
@@ -69,7 +69,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **GetAllMedias**
-> InlineResponse200 GetAllMedias(ctx, optional)
+> InlineResponse2001 GetAllMedias(ctx, optional)
 Query medias
 
 Get latest created medias
@@ -91,34 +91,6 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse200**](inline_response_200.md)
-
-### Authorization
-
-No authorization required
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **GetMedia**
-> InlineResponse2001 GetMedia(ctx, id)
-Get a media
-
-Get one media
-
-### Required Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-  **id** | **string**| Media ID | 
-
-### Return type
-
 [**InlineResponse2001**](inline_response_200_1.md)
 
 ### Authorization
@@ -132,8 +104,36 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **GetMedia**
+> InlineResponse2002 GetMedia(ctx, id)
+Get a media
+
+Get one media
+
+### Required Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+  **id** | **string**| Media ID | 
+
+### Return type
+
+[**InlineResponse2002**](inline_response_200_2.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **UpdateMedia**
-> InlineResponse2001 UpdateMedia(ctx, id, media)
+> InlineResponse2002 UpdateMedia(ctx, id, media)
 Update a media
 
 Update an existing media
@@ -148,7 +148,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse2001**](inline_response_200_1.md)
+[**InlineResponse2002**](inline_response_200_2.md)
 
 ### Authorization
 
@@ -162,7 +162,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **UploadMediaFile**
-> InlineResponse2001 UploadMediaFile(ctx, id, file)
+> InlineResponse2002 UploadMediaFile(ctx, id, file)
 Upload a media file
 
 Upload a new media file for a given media ID
@@ -177,7 +177,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse2001**](inline_response_200_1.md)
+[**InlineResponse2002**](inline_response_200_2.md)
 
 ### Authorization
 
