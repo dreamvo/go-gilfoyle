@@ -19,9 +19,8 @@ jobs:
 
     - name: Generate client
       run: |
-          git remote set-url origin "https://$ORGANIZATION:${{ secrets.GITHUB_TOKEN }}@github.com/$ORGANIZATION/$REPOSITORY.git"
-          git config --global user.name "$ORGANIZATION"
-          git config --global user.email "contact@dreamvo.com"
+          git config --global user.name "$GITHUB_ACTOR"
+          git config --global user.email "$GITHUB_ACTOR@users.noreply.github.com"
           docker run --rm -v ${PWD}:/app swaggerapi/swagger-codegen-cli generate -i https://raw.githubusercontent.com/dreamvo/gilfoyle/master/api/docs/swagger.json -l $CODEGEN_LANG -o /app --git-user-id "$ORGANIZATION" --git-repo-id $REPOSITORY
           if [[ -z $(git status -s) ]]
           then
