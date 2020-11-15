@@ -4,7 +4,7 @@ All URIs are relative to *http://demo-v1.gilfoyle.dreamvo.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**CheckHealth**](HealthApi.md#CheckHealth) | **Get** /health | Check service status
+[**CheckHealth**](HealthApi.md#CheckHealth) | **Get** /healthz | Check service status
 
 
 # **CheckHealth**

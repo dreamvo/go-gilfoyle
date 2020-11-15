@@ -21,7 +21,7 @@ All URIs are relative to *http://demo-v1.gilfoyle.dreamvo.com*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*HealthApi* | [**CheckHealth**](docs/HealthApi.md#checkhealth) | **Get** /health | Check service status
+*HealthApi* | [**CheckHealth**](docs/HealthApi.md#checkhealth) | **Get** /healthz | Check service status
 *MediasApi* | [**CreateMedia**](docs/MediasApi.md#createmedia) | **Post** /medias | Create a media
 *MediasApi* | [**DeleteMedia**](docs/MediasApi.md#deletemedia) | **Delete** /medias/{id} | Delete a media
 *MediasApi* | [**GetAllMedias**](docs/MediasApi.md#getallmedias) | **Get** /medias | Query medias

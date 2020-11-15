@@ -42,7 +42,7 @@ func (a *HealthApiService) CheckHealth(ctx context.Context) (InlineResponse200, 
 	)
 
 	// create path and map variables
-	localVarPath := a.client.cfg.BasePath + "/health"
+	localVarPath := a.client.cfg.BasePath + "/healthz"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
