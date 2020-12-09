@@ -9,7 +9,8 @@ Method | HTTP request | Description
 [**GetAllMedias**](MediasApi.md#GetAllMedias) | **Get** /medias | Query medias
 [**GetMedia**](MediasApi.md#GetMedia) | **Get** /medias/{id} | Get a media
 [**UpdateMedia**](MediasApi.md#UpdateMedia) | **Patch** /medias/{id} | Update a media
-[**UploadMediaFile**](MediasApi.md#UploadMediaFile) | **Post** /medias/{id}/upload | Upload a media file
+[**UploadAudio**](MediasApi.md#UploadAudio) | **Post** /medias/{id}/upload/audio | Upload a audio file
+[**UploadVideo**](MediasApi.md#UploadVideo) | **Post** /medias/{id}/upload/video | Upload a video file
 
 
 # **CreateMedia**
@@ -41,7 +42,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **DeleteMedia**
-> HttputilsDataResponse DeleteMedia(ctx, id)
+> UtilDataResponse DeleteMedia(ctx, id)
 Delete a media
 
 Delete one media
@@ -55,7 +56,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HttputilsDataResponse**](httputils.DataResponse.md)
+[**UtilDataResponse**](util.DataResponse.md)
 
 ### Authorization
 
@@ -161,11 +162,11 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **UploadMediaFile**
-> InlineResponse2002 UploadMediaFile(ctx, id, file)
-Upload a media file
+# **UploadAudio**
+> InlineResponse2003 UploadAudio(ctx, id, file)
+Upload a audio file
 
-Upload a new media file for a given media ID
+Upload a new audio file for a given media ID
 
 ### Required Parameters
 
@@ -173,11 +174,40 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
   **id** | **string**| Media identifier | 
-  **file** | ***os.File**| Media file | 
+  **file** | ***os.File**| Audio file | 
 
 ### Return type
 
-[**InlineResponse2002**](inline_response_200_2.md)
+[**InlineResponse2003**](inline_response_200_3.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: multipart/form-data
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **UploadVideo**
+> InlineResponse2003 UploadVideo(ctx, id, file)
+Upload a video file
+
+Upload a new video file for a given media ID
+
+### Required Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+  **id** | **string**| Media identifier | 
+  **file** | ***os.File**| Video file | 
+
+### Return type
+
+[**InlineResponse2003**](inline_response_200_3.md)
 
 ### Authorization
 

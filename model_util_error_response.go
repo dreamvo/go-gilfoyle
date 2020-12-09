@@ -9,7 +9,7 @@
 
 package swagger
 
-type InlineResponse2002 struct {
-	Data *EntMedia `json:"data,omitempty"`
-	UtilDataResponse *UtilDataResponse `json:"util.DataResponse,omitempty"`
+type UtilErrorResponse struct {
+	Code int32 `json:"code,omitempty"`
+	Message string `json:"message,omitempty"`
 }

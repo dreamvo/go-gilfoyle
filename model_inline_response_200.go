@@ -11,5 +11,5 @@ package swagger
 
 type InlineResponse200 struct {
 	Data *ApiHealthCheckResponse `json:"data,omitempty"`
-	HttputilsDataResponse *HttputilsDataResponse `json:"httputils.DataResponse,omitempty"`
+	UtilDataResponse *UtilDataResponse `json:"util.DataResponse,omitempty"`
 }

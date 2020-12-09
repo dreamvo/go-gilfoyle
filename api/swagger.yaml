@@ -17,7 +17,7 @@ paths:
   /healthz:
     get:
       tags:
-      - "health"
+      - "Instance"
       summary: "Check service status"
       description: "Check for the health of the service"
       operationId: "checkHealth"
@@ -61,7 +61,7 @@ paths:
         "500":
           description: "Internal Server Error"
           schema:
-            $ref: "#/definitions/httputils.ErrorResponse"
+            $ref: "#/definitions/util.ErrorResponse"
     post:
       tags:
       - "Medias"
@@ -88,11 +88,11 @@ paths:
         "400":
           description: "Bad Request"
           schema:
-            $ref: "#/definitions/httputils.ErrorResponse"
+            $ref: "#/definitions/util.ErrorResponse"
         "500":
           description: "Internal Server Error"
           schema:
-            $ref: "#/definitions/httputils.ErrorResponse"
+            $ref: "#/definitions/util.ErrorResponse"
   /medias/{id}:
     get:
       tags:
@@ -117,11 +117,11 @@ paths:
         "404":
           description: "Not Found"
           schema:
-            $ref: "#/definitions/httputils.ErrorResponse"
+            $ref: "#/definitions/util.ErrorResponse"
         "500":
           description: "Internal Server Error"
           schema:
-            $ref: "#/definitions/httputils.ErrorResponse"
+            $ref: "#/definitions/util.ErrorResponse"
     delete:
       tags:
       - "Medias"
@@ -141,19 +141,19 @@ paths:
         "200":
           description: "OK"
           schema:
-            $ref: "#/definitions/httputils.DataResponse"
+            $ref: "#/definitions/util.DataResponse"
         "400":
           description: "Bad Request"
           schema:
-            $ref: "#/definitions/httputils.ErrorResponse"
+            $ref: "#/definitions/util.ErrorResponse"
         "404":
           description: "Not Found"
           schema:
-            $ref: "#/definitions/httputils.ErrorResponse"
+            $ref: "#/definitions/util.ErrorResponse"
         "500":
           description: "Internal Server Error"
           schema:
-            $ref: "#/definitions/httputils.ErrorResponse"
+            $ref: "#/definitions/util.ErrorResponse"
     patch:
       tags:
       - "Medias"
@@ -186,22 +186,22 @@ paths:
         "400":
           description: "Bad Request"
           schema:
-            $ref: "#/definitions/httputils.ErrorResponse"
+            $ref: "#/definitions/util.ErrorResponse"
         "404":
           description: "Not Found"
           schema:
-            $ref: "#/definitions/httputils.ErrorResponse"
+            $ref: "#/definitions/util.ErrorResponse"
         "500":
           description: "Internal Server Error"
           schema:
-            $ref: "#/definitions/httputils.ErrorResponse"
-  /medias/{id}/upload:
+            $ref: "#/definitions/util.ErrorResponse"
+  /medias/{id}/upload/audio:
     post:
       tags:
       - "Medias"
-      summary: "Upload a media file"
-      description: "Upload a new media file for a given media ID"
-      operationId: "uploadMediaFile"
+      summary: "Upload a audio file"
+      description: "Upload a new audio file for a given media ID"
+      operationId: "uploadAudio"
       consumes:
       - "multipart/form-data"
       produces:
@@ -215,7 +215,7 @@ paths:
         x-exportParamName: "Id"
       - name: "file"
         in: "formData"
-        description: "Media file"
+        description: "Audio file"
         required: true
         type: "file"
         x-exportParamName: "File"
@@ -223,19 +223,210 @@ paths:
         "200":
           description: "OK"
           schema:
-            $ref: "#/definitions/inline_response_200_2"
+            $ref: "#/definitions/inline_response_200_3"
         "400":
           description: "Bad Request"
           schema:
-            $ref: "#/definitions/httputils.ErrorResponse"
+            $ref: "#/definitions/util.ErrorResponse"
         "404":
           description: "Not Found"
           schema:
-            $ref: "#/definitions/httputils.ErrorResponse"
+            $ref: "#/definitions/util.ErrorResponse"
         "500":
           description: "Internal Server Error"
           schema:
-            $ref: "#/definitions/httputils.ErrorResponse"
+            $ref: "#/definitions/util.ErrorResponse"
+  /medias/{id}/upload/video:
+    post:
+      tags:
+      - "Medias"
+      summary: "Upload a video file"
+      description: "Upload a new video file for a given media ID"
+      operationId: "uploadVideo"
+      consumes:
+      - "multipart/form-data"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "Media identifier"
+        required: true
+        type: "string"
+        x-exportParamName: "Id"
+      - name: "file"
+        in: "formData"
+        description: "Video file"
+        required: true
+        type: "file"
+        x-exportParamName: "File"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            $ref: "#/definitions/inline_response_200_3"
+        "400":
+          description: "Bad Request"
+          schema:
+            $ref: "#/definitions/util.ErrorResponse"
+        "404":
+          description: "Not Found"
+          schema:
+            $ref: "#/definitions/util.ErrorResponse"
+        "500":
+          description: "Internal Server Error"
+          schema:
+            $ref: "#/definitions/util.ErrorResponse"
+  /medias/{media_id}/attachments:
+    get:
+      tags:
+      - "Attachments"
+      summary: "Get attachments of a media"
+      description: "Get attachments of a media"
+      operationId: "getMediaAttachments"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "media_id"
+        in: "path"
+        description: "Media identifier"
+        required: true
+        type: "string"
+        x-exportParamName: "MediaId"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            $ref: "#/definitions/util.DataResponse"
+        "500":
+          description: "Internal Server Error"
+          schema:
+            $ref: "#/definitions/util.ErrorResponse"
+    post:
+      tags:
+      - "Attachments"
+      summary: "Add attachment to a media"
+      description: "Add attachment to a media"
+      operationId: "addMediaAttachment"
+      consumes:
+      - "multipart/form-data"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "media_id"
+        in: "path"
+        description: "Media identifier"
+        required: true
+        type: "string"
+        x-exportParamName: "MediaId"
+      - name: "file"
+        in: "formData"
+        description: "Attachment file"
+        required: true
+        type: "file"
+        x-exportParamName: "File"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            $ref: "#/definitions/util.DataResponse"
+        "400":
+          description: "Bad Request"
+          schema:
+            $ref: "#/definitions/util.ErrorResponse"
+        "500":
+          description: "Internal Server Error"
+          schema:
+            $ref: "#/definitions/util.ErrorResponse"
+  /medias/{media_id}/attachments/{key}:
+    delete:
+      tags:
+      - "Attachments"
+      summary: "Delete attachment of a media"
+      description: "Delete attachment of a media"
+      operationId: "deleteMediaAttachment"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "media_id"
+        in: "path"
+        description: "Media identifier"
+        required: true
+        type: "string"
+        x-exportParamName: "MediaId"
+      - name: "key"
+        in: "path"
+        description: "Attachment unique identifier"
+        required: true
+        type: "string"
+        x-exportParamName: "Key"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            $ref: "#/definitions/util.DataResponse"
+        "400":
+          description: "Bad Request"
+          schema:
+            $ref: "#/definitions/util.ErrorResponse"
+        "500":
+          description: "Internal Server Error"
+          schema:
+            $ref: "#/definitions/util.ErrorResponse"
+  /medias/{media_id}/stream/{preset}:
+    get:
+      tags:
+      - "Stream"
+      summary: "Get stream from media file"
+      description: "Get stream from media file"
+      operationId: "streamMedia"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "media_id"
+        in: "path"
+        description: "Media identifier"
+        required: true
+        type: "string"
+        x-exportParamName: "MediaId"
+      - name: "preset"
+        in: "path"
+        description: "Encoder preset"
+        required: true
+        type: "string"
+        x-exportParamName: "Preset"
+      responses:
+        "200":
+          description: "OK"
+          headers:
+            Content-Type:
+              type: "string"
+              description: "application/octet-stream"
+          schema:
+            $ref: "#/definitions/util.DataResponse"
+        "500":
+          description: "Internal Server Error"
+          schema:
+            $ref: "#/definitions/util.ErrorResponse"
+  /metricsz:
+    get:
+      tags:
+      - "Instance"
+      summary: "Get instance metrics"
+      description: "Get metrics about this Gilfoyle instance"
+      operationId: "getMetrics"
+      produces:
+      - "application/json"
+      parameters: []
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            $ref: "#/definitions/util.DataResponse"
+        "500":
+          description: "Internal Server Error"
+          schema:
+            $ref: "#/definitions/util.ErrorResponse"
 definitions:
   api.CreateMedia:
     type: "object"
@@ -245,6 +436,42 @@ definitions:
       title:
         type: "string"
         example: "Sheep Discovers How To Use A Trampoline"
+  api.FileFormat:
+    type: "object"
+    properties:
+      bit_rate:
+        type: "string"
+      duration:
+        type: "string"
+        example: "0"
+      filename:
+        type: "string"
+      format_long_name:
+        type: "string"
+      format_name:
+        type: "string"
+      nb_programs:
+        type: "integer"
+      nb_streams:
+        type: "integer"
+      probe_score:
+        type: "integer"
+      size:
+        type: "string"
+      start_time:
+        type: "string"
+        example: "0"
+    example:
+      duration: "0"
+      bit_rate: "bit_rate"
+      start_time: "0"
+      filename: "filename"
+      size: "size"
+      probe_score: 1
+      format_long_name: "format_long_name"
+      nb_programs: 0
+      nb_streams: 6
+      format_name: "format_name"
   api.HealthCheckResponse:
     type: "object"
     properties:
@@ -263,26 +490,143 @@ definitions:
       title:
         type: "string"
         example: "Sheep Discovers How To Use A Trampoline"
+  dialect.Driver:
+    type: "object"
   ent.Media:
     type: "object"
     properties:
       created_at:
         type: "string"
+        description: "CreatedAt holds the value of the \"created_at\" field."
+      edges:
+        description: "Edges holds the relations/edges for other nodes in the graph.\n\
+          The values are being populated by the MediaQuery when eager-loading is set."
+        $ref: "#/definitions/ent.MediaEdges"
       id:
         type: "string"
+        description: "ID of the ent."
       status:
         type: "string"
+        description: "Status holds the value of the \"status\" field."
       title:
         type: "string"
+        description: "Title holds the value of the \"title\" field."
       updated_at:
         type: "string"
+        description: "UpdatedAt holds the value of the \"updated_at\" field."
     example:
       updated_at: "updated_at"
+      edges:
+        media_files:
+        - duration_seconds: 0.80082819046101150206595775671303272247314453125
+          scaled_width: 1
+          updated_at: "updated_at"
+          media_type: "media_type"
+          encoder_preset: "encoder_preset"
+          framerate: 6
+          edges: {}
+          created_at: "created_at"
+          id: "id"
+          video_bitrate: 5
+        - duration_seconds: 0.80082819046101150206595775671303272247314453125
+          scaled_width: 1
+          updated_at: "updated_at"
+          media_type: "media_type"
+          encoder_preset: "encoder_preset"
+          framerate: 6
+          edges: {}
+          created_at: "created_at"
+          id: "id"
+          video_bitrate: 5
       created_at: "created_at"
       id: "id"
       title: "title"
       status: "status"
-  httputils.DataResponse:
+  ent.MediaEdges:
+    type: "object"
+    properties:
+      media_files:
+        type: "array"
+        description: "MediaFiles holds the value of the media_files edge."
+        items:
+          $ref: "#/definitions/ent.MediaFile"
+    example:
+      media_files:
+      - duration_seconds: 0.80082819046101150206595775671303272247314453125
+        scaled_width: 1
+        updated_at: "updated_at"
+        media_type: "media_type"
+        encoder_preset: "encoder_preset"
+        framerate: 6
+        edges: {}
+        created_at: "created_at"
+        id: "id"
+        video_bitrate: 5
+      - duration_seconds: 0.80082819046101150206595775671303272247314453125
+        scaled_width: 1
+        updated_at: "updated_at"
+        media_type: "media_type"
+        encoder_preset: "encoder_preset"
+        framerate: 6
+        edges: {}
+        created_at: "created_at"
+        id: "id"
+        video_bitrate: 5
+  ent.MediaFile:
+    type: "object"
+    properties:
+      created_at:
+        type: "string"
+        description: "CreatedAt holds the value of the \"created_at\" field."
+      duration_seconds:
+        type: "number"
+        description: "DurationSeconds holds the value of the \"duration_seconds\"\
+          \ field."
+      edges:
+        description: "Edges holds the relations/edges for other nodes in the graph.\n\
+          The values are being populated by the MediaFileQuery when eager-loading\
+          \ is set."
+        $ref: "#/definitions/ent.MediaFileEdges"
+      encoder_preset:
+        type: "string"
+        description: "EncoderPreset holds the value of the \"encoder_preset\" field."
+      framerate:
+        type: "integer"
+        description: "Framerate holds the value of the \"framerate\" field."
+      id:
+        type: "string"
+        description: "ID of the ent."
+      media_type:
+        type: "string"
+        description: "MediaType holds the value of the \"media_type\" field."
+      scaled_width:
+        type: "integer"
+        description: "ScaledWidth holds the value of the \"scaled_width\" field."
+      updated_at:
+        type: "string"
+        description: "UpdatedAt holds the value of the \"updated_at\" field."
+      video_bitrate:
+        type: "integer"
+        description: "VideoBitrate holds the value of the \"video_bitrate\" field."
+    example:
+      duration_seconds: 0.80082819046101150206595775671303272247314453125
+      scaled_width: 1
+      updated_at: "updated_at"
+      media_type: "media_type"
+      encoder_preset: "encoder_preset"
+      framerate: 6
+      edges: {}
+      created_at: "created_at"
+      id: "id"
+      video_bitrate: 5
+  ent.MediaFileEdges:
+    type: "object"
+    properties:
+      media:
+        description: "Media holds the value of the media edge."
+        $ref: "#/definitions/ent.Media"
+    example: {}
+  util.DataResponse:
     type: "object"
     properties:
       code:
@@ -294,7 +638,7 @@ definitions:
     example:
       code: 200
       data: "{}"
-  httputils.ErrorResponse:
+  util.ErrorResponse:
     type: "object"
     properties:
       code:
@@ -308,15 +652,15 @@ definitions:
     properties:
       data:
         $ref: "#/definitions/api.HealthCheckResponse"
-      httputils.DataResponse:
-        $ref: "#/definitions/httputils.DataResponse"
+      util.DataResponse:
+        $ref: "#/definitions/util.DataResponse"
     example:
+      util.DataResponse:
+        code: 200
+        data: "{}"
       data:
         commit: "commit"
         tag: "tag"
-      httputils.DataResponse:
-        code: 200
-        data: "{}"
   inline_response_200_1:
     type: "object"
     properties:
@@ -324,37 +668,125 @@ definitions:
         type: "array"
         items:
           $ref: "#/definitions/ent.Media"
-      httputils.DataResponse:
-        $ref: "#/definitions/httputils.DataResponse"
+      util.DataResponse:
+        $ref: "#/definitions/util.DataResponse"
     example:
-      data:
-      - updated_at: "updated_at"
-        created_at: "created_at"
-        id: "id"
-        title: "title"
-        status: "status"
-      - updated_at: "updated_at"
-        created_at: "created_at"
-        id: "id"
-        title: "title"
-        status: "status"
-      httputils.DataResponse:
+      util.DataResponse:
         code: 200
         data: "{}"
+      data:
+      - updated_at: "updated_at"
+        edges:
+          media_files:
+          - duration_seconds: 0.80082819046101150206595775671303272247314453125
+            scaled_width: 1
+            updated_at: "updated_at"
+            media_type: "media_type"
+            encoder_preset: "encoder_preset"
+            framerate: 6
+            edges: {}
+            created_at: "created_at"
+            id: "id"
+            video_bitrate: 5
+          - duration_seconds: 0.80082819046101150206595775671303272247314453125
+            scaled_width: 1
+            updated_at: "updated_at"
+            media_type: "media_type"
+            encoder_preset: "encoder_preset"
+            framerate: 6
+            edges: {}
+            created_at: "created_at"
+            id: "id"
+            video_bitrate: 5
+        created_at: "created_at"
+        id: "id"
+        title: "title"
+        status: "status"
+      - updated_at: "updated_at"
+        edges:
+          media_files:
+          - duration_seconds: 0.80082819046101150206595775671303272247314453125
+            scaled_width: 1
+            updated_at: "updated_at"
+            media_type: "media_type"
+            encoder_preset: "encoder_preset"
+            framerate: 6
+            edges: {}
+            created_at: "created_at"
+            id: "id"
+            video_bitrate: 5
+          - duration_seconds: 0.80082819046101150206595775671303272247314453125
+            scaled_width: 1
+            updated_at: "updated_at"
+            media_type: "media_type"
+            encoder_preset: "encoder_preset"
+            framerate: 6
+            edges: {}
+            created_at: "created_at"
+            id: "id"
+            video_bitrate: 5
+        created_at: "created_at"
+        id: "id"
+        title: "title"
+        status: "status"
   inline_response_200_2:
     type: "object"
     properties:
       data:
         $ref: "#/definitions/ent.Media"
-      httputils.DataResponse:
-        $ref: "#/definitions/httputils.DataResponse"
+      util.DataResponse:
+        $ref: "#/definitions/util.DataResponse"
     example:
+      util.DataResponse:
+        code: 200
+        data: "{}"
       data:
         updated_at: "updated_at"
+        edges:
+          media_files:
+          - duration_seconds: 0.80082819046101150206595775671303272247314453125
+            scaled_width: 1
+            updated_at: "updated_at"
+            media_type: "media_type"
+            encoder_preset: "encoder_preset"
+            framerate: 6
+            edges: {}
+            created_at: "created_at"
+            id: "id"
+            video_bitrate: 5
+          - duration_seconds: 0.80082819046101150206595775671303272247314453125
+            scaled_width: 1
+            updated_at: "updated_at"
+            media_type: "media_type"
+            encoder_preset: "encoder_preset"
+            framerate: 6
+            edges: {}
+            created_at: "created_at"
+            id: "id"
+            video_bitrate: 5
         created_at: "created_at"
         id: "id"
         title: "title"
         status: "status"
-      httputils.DataResponse:
+  inline_response_200_3:
+    type: "object"
+    properties:
+      data:
+        $ref: "#/definitions/api.FileFormat"
+      util.DataResponse:
+        $ref: "#/definitions/util.DataResponse"
+    example:
+      util.DataResponse:
         code: 200
         data: "{}"
+      data:
+        duration: "0"
+        bit_rate: "bit_rate"
+        start_time: "0"
+        filename: "filename"
+        size: "size"
+        probe_score: 1
+        format_long_name: "format_long_name"
+        nb_programs: 0
+        nb_streams: 6
+        format_name: "format_name"

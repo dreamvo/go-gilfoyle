@@ -9,7 +9,7 @@
 
 package swagger
 
-type InlineResponse2002 struct {
-	Data *EntMedia `json:"data,omitempty"`
-	UtilDataResponse *UtilDataResponse `json:"util.DataResponse,omitempty"`
+type EntMediaFileEdges struct {
+	// Media holds the value of the media edge.
+	Media *EntMedia `json:"media,omitempty"`
 }

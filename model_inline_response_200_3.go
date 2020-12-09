@@ -9,7 +9,7 @@
 
 package swagger
 
-type InlineResponse2002 struct {
-	Data *EntMedia `json:"data,omitempty"`
+type InlineResponse2003 struct {
+	Data *ApiFileFormat `json:"data,omitempty"`
 	UtilDataResponse *UtilDataResponse `json:"util.DataResponse,omitempty"`
 }

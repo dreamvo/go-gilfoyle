@@ -21,26 +21,38 @@ All URIs are relative to *http://demo-v1.gilfoyle.dreamvo.com*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*HealthApi* | [**CheckHealth**](docs/HealthApi.md#checkhealth) | **Get** /healthz | Check service status
+*AttachmentsApi* | [**AddMediaAttachment**](docs/AttachmentsApi.md#addmediaattachment) | **Post** /medias/{media_id}/attachments | Add attachment to a media
+*AttachmentsApi* | [**DeleteMediaAttachment**](docs/AttachmentsApi.md#deletemediaattachment) | **Delete** /medias/{media_id}/attachments/{key} | Delete attachment of a media
+*AttachmentsApi* | [**GetMediaAttachments**](docs/AttachmentsApi.md#getmediaattachments) | **Get** /medias/{media_id}/attachments | Get attachments of a media
+*InstanceApi* | [**CheckHealth**](docs/InstanceApi.md#checkhealth) | **Get** /healthz | Check service status
+*InstanceApi* | [**GetMetrics**](docs/InstanceApi.md#getmetrics) | **Get** /metricsz | Get instance metrics
 *MediasApi* | [**CreateMedia**](docs/MediasApi.md#createmedia) | **Post** /medias | Create a media
 *MediasApi* | [**DeleteMedia**](docs/MediasApi.md#deletemedia) | **Delete** /medias/{id} | Delete a media
 *MediasApi* | [**GetAllMedias**](docs/MediasApi.md#getallmedias) | **Get** /medias | Query medias
 *MediasApi* | [**GetMedia**](docs/MediasApi.md#getmedia) | **Get** /medias/{id} | Get a media
 *MediasApi* | [**UpdateMedia**](docs/MediasApi.md#updatemedia) | **Patch** /medias/{id} | Update a media
-*MediasApi* | [**UploadMediaFile**](docs/MediasApi.md#uploadmediafile) | **Post** /medias/{id}/upload | Upload a media file
+*MediasApi* | [**UploadAudio**](docs/MediasApi.md#uploadaudio) | **Post** /medias/{id}/upload/audio | Upload a audio file
+*MediasApi* | [**UploadVideo**](docs/MediasApi.md#uploadvideo) | **Post** /medias/{id}/upload/video | Upload a video file
+*StreamApi* | [**StreamMedia**](docs/StreamApi.md#streammedia) | **Get** /medias/{media_id}/stream/{preset} | Get stream from media file
 
 
 ## Documentation For Models
 
  - [ApiCreateMedia](docs/ApiCreateMedia.md)
+ - [ApiFileFormat](docs/ApiFileFormat.md)
  - [ApiHealthCheckResponse](docs/ApiHealthCheckResponse.md)
  - [ApiUpdateMedia](docs/ApiUpdateMedia.md)
+ - [DialectDriver](docs/DialectDriver.md)
  - [EntMedia](docs/EntMedia.md)
- - [HttputilsDataResponse](docs/HttputilsDataResponse.md)
- - [HttputilsErrorResponse](docs/HttputilsErrorResponse.md)
+ - [EntMediaEdges](docs/EntMediaEdges.md)
+ - [EntMediaFile](docs/EntMediaFile.md)
+ - [EntMediaFileEdges](docs/EntMediaFileEdges.md)
  - [InlineResponse200](docs/InlineResponse200.md)
  - [InlineResponse2001](docs/InlineResponse2001.md)
  - [InlineResponse2002](docs/InlineResponse2002.md)
+ - [InlineResponse2003](docs/InlineResponse2003.md)
+ - [UtilDataResponse](docs/UtilDataResponse.md)
+ - [UtilErrorResponse](docs/UtilErrorResponse.md)
 
 
 ## Documentation For Authorization

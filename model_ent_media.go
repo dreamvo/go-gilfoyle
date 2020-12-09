@@ -10,9 +10,16 @@
 package swagger
 
 type EntMedia struct {
+	// CreatedAt holds the value of the \"created_at\" field.
 	CreatedAt string `json:"created_at,omitempty"`
+	// Edges holds the relations/edges for other nodes in the graph. The values are being populated by the MediaQuery when eager-loading is set.
+	Edges *EntMediaEdges `json:"edges,omitempty"`
+	// ID of the ent.
 	Id string `json:"id,omitempty"`
+	// Status holds the value of the \"status\" field.
 	Status string `json:"status,omitempty"`
+	// Title holds the value of the \"title\" field.
 	Title string `json:"title,omitempty"`
+	// UpdatedAt holds the value of the \"updated_at\" field.
 	UpdatedAt string `json:"updated_at,omitempty"`
 }

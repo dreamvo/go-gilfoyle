@@ -1,10 +1,10 @@
-# InlineResponse2001
+# UtilDataResponse
 
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Data** | [**[]EntMedia**](ent.Media.md) |  | [optional] [default to null]
-**UtilDataResponse** | [***UtilDataResponse**](util.DataResponse.md) |  | [optional] [default to null]
+**Code** | **int32** |  | [optional] [default to null]
+**Data** | [***interface{}**](interface{}.md) |  | [optional] [default to null]
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

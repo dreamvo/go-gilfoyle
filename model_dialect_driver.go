@@ -9,7 +9,5 @@
 
 package swagger
 
-type InlineResponse2002 struct {
-	Data *EntMedia `json:"data,omitempty"`
-	UtilDataResponse *UtilDataResponse `json:"util.DataResponse,omitempty"`
+type DialectDriver struct {
 }
