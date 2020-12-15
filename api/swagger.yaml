@@ -490,8 +490,6 @@ definitions:
       title:
         type: "string"
         example: "Sheep Discovers How To Use A Trampoline"
-  dialect.Driver:
-    type: "object"
   ent.Media:
     type: "object"
     properties:

@@ -42,7 +42,6 @@ Class | Method | HTTP request | Description
  - [ApiFileFormat](docs/ApiFileFormat.md)
  - [ApiHealthCheckResponse](docs/ApiHealthCheckResponse.md)
  - [ApiUpdateMedia](docs/ApiUpdateMedia.md)
- - [DialectDriver](docs/DialectDriver.md)
  - [EntMedia](docs/EntMedia.md)
  - [EntMediaEdges](docs/EntMediaEdges.md)
  - [EntMediaFile](docs/EntMediaFile.md)
