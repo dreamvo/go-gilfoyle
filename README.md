@@ -21,7 +21,7 @@ All URIs are relative to *http://demo-v1.gilfoyle.dreamvo.com*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*AttachmentsApi* | [**AddMediaAttachment**](docs/AttachmentsApi.md#addmediaattachment) | **Post** /medias/{media_id}/attachments | Add attachment to a media
+*AttachmentsApi* | [**AddMediaAttachment**](docs/AttachmentsApi.md#addmediaattachment) | **Post** /medias/{media_id}/attachments/{key} | Add attachment to a media
 *AttachmentsApi* | [**DeleteMediaAttachment**](docs/AttachmentsApi.md#deletemediaattachment) | **Delete** /medias/{media_id}/attachments/{key} | Delete attachment of a media
 *AttachmentsApi* | [**GetMediaAttachments**](docs/AttachmentsApi.md#getmediaattachments) | **Get** /medias/{media_id}/attachments | Get attachments of a media
 *InstanceApi* | [**CheckHealth**](docs/InstanceApi.md#checkhealth) | **Get** /healthz | Check service status

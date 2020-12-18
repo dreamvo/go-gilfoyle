@@ -32,11 +32,12 @@ AttachmentsApiService Add attachment to a media
 Add attachment to a media
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param mediaId Media identifier
+ * @param key Attachment unique identifier
  * @param file Attachment file
 
 @return UtilDataResponse
 */
-func (a *AttachmentsApiService) AddMediaAttachment(ctx context.Context, mediaId string, file *os.File) (UtilDataResponse, *http.Response, error) {
+func (a *AttachmentsApiService) AddMediaAttachment(ctx context.Context, mediaId string, key string, file *os.File) (UtilDataResponse, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Post")
 		localVarPostBody   interface{}
@@ -46,8 +47,9 @@ func (a *AttachmentsApiService) AddMediaAttachment(ctx context.Context, mediaId 
 	)
 
 	// create path and map variables
-	localVarPath := a.client.cfg.BasePath + "/medias/{media_id}/attachments"
+	localVarPath := a.client.cfg.BasePath + "/medias/{media_id}/attachments/{key}"
 	localVarPath = strings.Replace(localVarPath, "{"+"media_id"+"}", fmt.Sprintf("%v", mediaId), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"key"+"}", fmt.Sprintf("%v", key), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
