@@ -25,7 +25,6 @@ Class | Method | HTTP request | Description
 *AttachmentsApi* | [**DeleteMediaAttachment**](docs/AttachmentsApi.md#deletemediaattachment) | **Delete** /medias/{media_id}/attachments/{key} | Delete attachment of a media
 *AttachmentsApi* | [**GetMediaAttachments**](docs/AttachmentsApi.md#getmediaattachments) | **Get** /medias/{media_id}/attachments | Get attachments of a media
 *InstanceApi* | [**CheckHealth**](docs/InstanceApi.md#checkhealth) | **Get** /healthz | Check service status
-*InstanceApi* | [**GetMetrics**](docs/InstanceApi.md#getmetrics) | **Get** /metricsz | Get instance metrics
 *MediasApi* | [**CreateMedia**](docs/MediasApi.md#createmedia) | **Post** /medias | Create a media
 *MediasApi* | [**DeleteMedia**](docs/MediasApi.md#deletemedia) | **Delete** /medias/{id} | Delete a media
 *MediasApi* | [**GetAllMedias**](docs/MediasApi.md#getallmedias) | **Get** /medias | Query medias
