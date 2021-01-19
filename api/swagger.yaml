@@ -236,6 +236,7 @@ paths:
           description: "Internal Server Error"
           schema:
             $ref: "#/definitions/util.ErrorResponse"
+      deprecated: true
   /medias/{id}/upload/video:
     post:
       tags:
@@ -302,6 +303,7 @@ paths:
           description: "Internal Server Error"
           schema:
             $ref: "#/definitions/util.ErrorResponse"
+      deprecated: true
   /medias/{media_id}/attachments/{key}:
     post:
       tags:
@@ -345,6 +347,7 @@ paths:
           description: "Internal Server Error"
           schema:
             $ref: "#/definitions/util.ErrorResponse"
+      deprecated: true
     delete:
       tags:
       - "Attachments"
@@ -379,15 +382,16 @@ paths:
           description: "Internal Server Error"
           schema:
             $ref: "#/definitions/util.ErrorResponse"
-  /medias/{media_id}/stream/{preset}:
+      deprecated: true
+  /medias/{media_id}/stream/playlists/{filename}:
     get:
       tags:
       - "Stream"
-      summary: "Get stream from media file"
-      description: "Get stream from media file"
-      operationId: "streamMedia"
+      summary: "Get HLS playlist file of a media"
+      description: "Get HLS playlist file of a media"
+      operationId: "getMediaPlaylistFile"
       produces:
-      - "application/json"
+      - "application/octet-stream"
       parameters:
       - name: "media_id"
         in: "path"
@@ -395,12 +399,12 @@ paths:
         required: true
         type: "string"
         x-exportParamName: "MediaId"
-      - name: "preset"
+      - name: "filename"
         in: "path"
-        description: "Encoder preset"
+        description: "HLS filename"
         required: true
         type: "string"
-        x-exportParamName: "Preset"
+        x-exportParamName: "Filename"
       responses:
         "200":
           description: "OK"
@@ -409,7 +413,11 @@ paths:
               type: "string"
               description: "application/octet-stream"
           schema:
-            $ref: "#/definitions/util.DataResponse"
+            type: "string"
+        "404":
+          description: "Not Found"
+          schema:
+            $ref: "#/definitions/util.ErrorResponse"
         "500":
           description: "Internal Server Error"
           schema:
@@ -490,6 +498,10 @@ definitions:
       id:
         type: "string"
         description: "ID of the ent."
+      original_filename:
+        type: "string"
+        description: "OriginalFilename holds the value of the \"original_filename\"\
+          \ field."
       status:
         type: "string"
         description: "Status holds the value of the \"status\" field."
@@ -500,29 +512,36 @@ definitions:
         type: "string"
         description: "UpdatedAt holds the value of the \"updated_at\" field."
     example:
+      original_filename: "original_filename"
       updated_at: "updated_at"
       edges:
         media_files:
         - duration_seconds: 0.80082819046101150206595775671303272247314453125
-          scaled_width: 1
+          resolution_height: 1
+          rendition_name: "rendition_name"
+          resolution_width: 5
+          framerate: 6
+          target_bandwidth: 5
+          edges: {}
+          format: "format"
+          created_at: "created_at"
           updated_at: "updated_at"
           media_type: "media_type"
-          encoder_preset: "encoder_preset"
-          framerate: 6
-          edges: {}
-          created_at: "created_at"
           id: "id"
-          video_bitrate: 5
+          video_bitrate: 2
         - duration_seconds: 0.80082819046101150206595775671303272247314453125
-          scaled_width: 1
+          resolution_height: 1
+          rendition_name: "rendition_name"
+          resolution_width: 5
+          framerate: 6
+          target_bandwidth: 5
+          edges: {}
+          format: "format"
+          created_at: "created_at"
           updated_at: "updated_at"
           media_type: "media_type"
-          encoder_preset: "encoder_preset"
-          framerate: 6
-          edges: {}
-          created_at: "created_at"
           id: "id"
-          video_bitrate: 5
+          video_bitrate: 2
       created_at: "created_at"
       id: "id"
       title: "title"
@@ -538,25 +557,31 @@ definitions:
     example:
       media_files:
       - duration_seconds: 0.80082819046101150206595775671303272247314453125
-        scaled_width: 1
+        resolution_height: 1
+        rendition_name: "rendition_name"
+        resolution_width: 5
+        framerate: 6
+        target_bandwidth: 5
+        edges: {}
+        format: "format"
+        created_at: "created_at"
         updated_at: "updated_at"
         media_type: "media_type"
-        encoder_preset: "encoder_preset"
-        framerate: 6
-        edges: {}
-        created_at: "created_at"
         id: "id"
-        video_bitrate: 5
+        video_bitrate: 2
       - duration_seconds: 0.80082819046101150206595775671303272247314453125
-        scaled_width: 1
+        resolution_height: 1
+        rendition_name: "rendition_name"
+        resolution_width: 5
+        framerate: 6
+        target_bandwidth: 5
+        edges: {}
+        format: "format"
+        created_at: "created_at"
         updated_at: "updated_at"
         media_type: "media_type"
-        encoder_preset: "encoder_preset"
-        framerate: 6
-        edges: {}
-        created_at: "created_at"
         id: "id"
-        video_bitrate: 5
+        video_bitrate: 2
   ent.MediaFile:
     type: "object"
     properties:
@@ -572,9 +597,9 @@ definitions:
           The values are being populated by the MediaFileQuery when eager-loading\
           \ is set."
         $ref: "#/definitions/ent.MediaFileEdges"
-      encoder_preset:
+      format:
         type: "string"
-        description: "EncoderPreset holds the value of the \"encoder_preset\" field."
+        description: "Format holds the value of the \"format\" field."
       framerate:
         type: "integer"
         description: "Framerate holds the value of the \"framerate\" field."
@@ -584,9 +609,21 @@ definitions:
       media_type:
         type: "string"
         description: "MediaType holds the value of the \"media_type\" field."
-      scaled_width:
+      rendition_name:
+        type: "string"
+        description: "RenditionName holds the value of the \"rendition_name\" field."
+      resolution_height:
         type: "integer"
-        description: "ScaledWidth holds the value of the \"scaled_width\" field."
+        description: "ResolutionHeight holds the value of the \"resolution_height\"\
+          \ field."
+      resolution_width:
+        type: "integer"
+        description: "ResolutionWidth holds the value of the \"resolution_width\"\
+          \ field."
+      target_bandwidth:
+        type: "integer"
+        description: "TargetBandwidth holds the value of the \"target_bandwidth\"\
+          \ field."
       updated_at:
         type: "string"
         description: "UpdatedAt holds the value of the \"updated_at\" field."
@@ -595,15 +632,18 @@ definitions:
         description: "VideoBitrate holds the value of the \"video_bitrate\" field."
     example:
       duration_seconds: 0.80082819046101150206595775671303272247314453125
-      scaled_width: 1
+      resolution_height: 1
+      rendition_name: "rendition_name"
+      resolution_width: 5
+      framerate: 6
+      target_bandwidth: 5
+      edges: {}
+      format: "format"
+      created_at: "created_at"
       updated_at: "updated_at"
       media_type: "media_type"
-      encoder_preset: "encoder_preset"
-      framerate: 6
-      edges: {}
-      created_at: "created_at"
       id: "id"
-      video_bitrate: 5
+      video_bitrate: 2
   ent.MediaFileEdges:
     type: "object"
     properties:
@@ -660,56 +700,70 @@ definitions:
         code: 200
         data: "{}"
       data:
-      - updated_at: "updated_at"
+      - original_filename: "original_filename"
+        updated_at: "updated_at"
         edges:
           media_files:
           - duration_seconds: 0.80082819046101150206595775671303272247314453125
-            scaled_width: 1
+            resolution_height: 1
+            rendition_name: "rendition_name"
+            resolution_width: 5
+            framerate: 6
+            target_bandwidth: 5
+            edges: {}
+            format: "format"
+            created_at: "created_at"
             updated_at: "updated_at"
             media_type: "media_type"
-            encoder_preset: "encoder_preset"
-            framerate: 6
-            edges: {}
-            created_at: "created_at"
             id: "id"
-            video_bitrate: 5
+            video_bitrate: 2
           - duration_seconds: 0.80082819046101150206595775671303272247314453125
-            scaled_width: 1
+            resolution_height: 1
+            rendition_name: "rendition_name"
+            resolution_width: 5
+            framerate: 6
+            target_bandwidth: 5
+            edges: {}
+            format: "format"
+            created_at: "created_at"
             updated_at: "updated_at"
             media_type: "media_type"
-            encoder_preset: "encoder_preset"
-            framerate: 6
-            edges: {}
-            created_at: "created_at"
             id: "id"
-            video_bitrate: 5
+            video_bitrate: 2
         created_at: "created_at"
         id: "id"
         title: "title"
         status: "status"
-      - updated_at: "updated_at"
+      - original_filename: "original_filename"
+        updated_at: "updated_at"
         edges:
           media_files:
           - duration_seconds: 0.80082819046101150206595775671303272247314453125
-            scaled_width: 1
+            resolution_height: 1
+            rendition_name: "rendition_name"
+            resolution_width: 5
+            framerate: 6
+            target_bandwidth: 5
+            edges: {}
+            format: "format"
+            created_at: "created_at"
             updated_at: "updated_at"
             media_type: "media_type"
-            encoder_preset: "encoder_preset"
-            framerate: 6
-            edges: {}
-            created_at: "created_at"
             id: "id"
-            video_bitrate: 5
+            video_bitrate: 2
           - duration_seconds: 0.80082819046101150206595775671303272247314453125
-            scaled_width: 1
+            resolution_height: 1
+            rendition_name: "rendition_name"
+            resolution_width: 5
+            framerate: 6
+            target_bandwidth: 5
+            edges: {}
+            format: "format"
+            created_at: "created_at"
             updated_at: "updated_at"
             media_type: "media_type"
-            encoder_preset: "encoder_preset"
-            framerate: 6
-            edges: {}
-            created_at: "created_at"
             id: "id"
-            video_bitrate: 5
+            video_bitrate: 2
         created_at: "created_at"
         id: "id"
         title: "title"
@@ -726,29 +780,36 @@ definitions:
         code: 200
         data: "{}"
       data:
+        original_filename: "original_filename"
         updated_at: "updated_at"
         edges:
           media_files:
           - duration_seconds: 0.80082819046101150206595775671303272247314453125
-            scaled_width: 1
+            resolution_height: 1
+            rendition_name: "rendition_name"
+            resolution_width: 5
+            framerate: 6
+            target_bandwidth: 5
+            edges: {}
+            format: "format"
+            created_at: "created_at"
             updated_at: "updated_at"
             media_type: "media_type"
-            encoder_preset: "encoder_preset"
-            framerate: 6
-            edges: {}
-            created_at: "created_at"
             id: "id"
-            video_bitrate: 5
+            video_bitrate: 2
           - duration_seconds: 0.80082819046101150206595775671303272247314453125
-            scaled_width: 1
+            resolution_height: 1
+            rendition_name: "rendition_name"
+            resolution_width: 5
+            framerate: 6
+            target_bandwidth: 5
+            edges: {}
+            format: "format"
+            created_at: "created_at"
             updated_at: "updated_at"
             media_type: "media_type"
-            encoder_preset: "encoder_preset"
-            framerate: 6
-            edges: {}
-            created_at: "created_at"
             id: "id"
-            video_bitrate: 5
+            video_bitrate: 2
         created_at: "created_at"
         id: "id"
         title: "title"

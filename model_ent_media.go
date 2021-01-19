@@ -16,6 +16,8 @@ type EntMedia struct {
 	Edges *EntMediaEdges `json:"edges,omitempty"`
 	// ID of the ent.
 	Id string `json:"id,omitempty"`
+	// OriginalFilename holds the value of the \"original_filename\" field.
+	OriginalFilename string `json:"original_filename,omitempty"`
 	// Status holds the value of the \"status\" field.
 	Status string `json:"status,omitempty"`
 	// Title holds the value of the \"title\" field.

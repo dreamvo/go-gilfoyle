@@ -27,27 +27,27 @@ var (
 type StreamApiService service
 
 /*
-StreamApiService Get stream from media file
-Get stream from media file
+StreamApiService Get HLS playlist file of a media
+Get HLS playlist file of a media
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param mediaId Media identifier
- * @param preset Encoder preset
+ * @param filename HLS filename
 
-@return UtilDataResponse
+@return string
 */
-func (a *StreamApiService) StreamMedia(ctx context.Context, mediaId string, preset string) (UtilDataResponse, *http.Response, error) {
+func (a *StreamApiService) GetMediaPlaylistFile(ctx context.Context, mediaId string, filename string) (string, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Get")
 		localVarPostBody   interface{}
 		localVarFileName   string
 		localVarFileBytes  []byte
-		localVarReturnValue UtilDataResponse
+		localVarReturnValue string
 	)
 
 	// create path and map variables
-	localVarPath := a.client.cfg.BasePath + "/medias/{media_id}/stream/{preset}"
+	localVarPath := a.client.cfg.BasePath + "/medias/{media_id}/stream/playlists/{filename}"
 	localVarPath = strings.Replace(localVarPath, "{"+"media_id"+"}", fmt.Sprintf("%v", mediaId), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"preset"+"}", fmt.Sprintf("%v", preset), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"filename"+"}", fmt.Sprintf("%v", filename), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -63,7 +63,7 @@ func (a *StreamApiService) StreamMedia(ctx context.Context, mediaId string, pres
 	}
 
 	// to determine the Accept header
-	localVarHttpHeaderAccepts := []string{"application/json"}
+	localVarHttpHeaderAccepts := []string{"application/octet-stream"}
 
 	// set Accept header
 	localVarHttpHeaderAccept := selectHeaderAccept(localVarHttpHeaderAccepts)
@@ -99,7 +99,18 @@ func (a *StreamApiService) StreamMedia(ctx context.Context, mediaId string, pres
 		}
 		
 		if localVarHttpResponse.StatusCode == 200 {
-			var v UtilDataResponse
+			var v string
+			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
+				if err != nil {
+					newErr.error = err.Error()
+					return localVarReturnValue, localVarHttpResponse, newErr
+				}
+				newErr.model = v
+				return localVarReturnValue, localVarHttpResponse, newErr
+		}
+		
+		if localVarHttpResponse.StatusCode == 404 {
+			var v UtilErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()

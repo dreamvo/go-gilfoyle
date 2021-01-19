@@ -16,16 +16,22 @@ type EntMediaFile struct {
 	DurationSeconds float32 `json:"duration_seconds,omitempty"`
 	// Edges holds the relations/edges for other nodes in the graph. The values are being populated by the MediaFileQuery when eager-loading is set.
 	Edges *EntMediaFileEdges `json:"edges,omitempty"`
-	// EncoderPreset holds the value of the \"encoder_preset\" field.
-	EncoderPreset string `json:"encoder_preset,omitempty"`
+	// Format holds the value of the \"format\" field.
+	Format string `json:"format,omitempty"`
 	// Framerate holds the value of the \"framerate\" field.
 	Framerate int32 `json:"framerate,omitempty"`
 	// ID of the ent.
 	Id string `json:"id,omitempty"`
 	// MediaType holds the value of the \"media_type\" field.
 	MediaType string `json:"media_type,omitempty"`
-	// ScaledWidth holds the value of the \"scaled_width\" field.
-	ScaledWidth int32 `json:"scaled_width,omitempty"`
+	// RenditionName holds the value of the \"rendition_name\" field.
+	RenditionName string `json:"rendition_name,omitempty"`
+	// ResolutionHeight holds the value of the \"resolution_height\" field.
+	ResolutionHeight int32 `json:"resolution_height,omitempty"`
+	// ResolutionWidth holds the value of the \"resolution_width\" field.
+	ResolutionWidth int32 `json:"resolution_width,omitempty"`
+	// TargetBandwidth holds the value of the \"target_bandwidth\" field.
+	TargetBandwidth int32 `json:"target_bandwidth,omitempty"`
 	// UpdatedAt holds the value of the \"updated_at\" field.
 	UpdatedAt string `json:"updated_at,omitempty"`
 	// VideoBitrate holds the value of the \"video_bitrate\" field.

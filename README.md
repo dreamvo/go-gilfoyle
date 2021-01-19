@@ -32,7 +32,7 @@ Class | Method | HTTP request | Description
 *MediasApi* | [**UpdateMedia**](docs/MediasApi.md#updatemedia) | **Patch** /medias/{id} | Update a media
 *MediasApi* | [**UploadAudio**](docs/MediasApi.md#uploadaudio) | **Post** /medias/{id}/upload/audio | Upload a audio file
 *MediasApi* | [**UploadVideo**](docs/MediasApi.md#uploadvideo) | **Post** /medias/{id}/upload/video | Upload a video file
-*StreamApi* | [**StreamMedia**](docs/StreamApi.md#streammedia) | **Get** /medias/{media_id}/stream/{preset} | Get stream from media file
+*StreamApi* | [**GetMediaPlaylistFile**](docs/StreamApi.md#getmediaplaylistfile) | **Get** /medias/{media_id}/stream/playlists/{filename} | Get HLS playlist file of a media
 
 
 ## Documentation For Models
