@@ -11,5 +11,6 @@ package swagger
 
 type InlineResponse2001 struct {
 	Data []EntMedia `json:"data,omitempty"`
+	Metadata *ApiMediasMetadata `json:"metadata,omitempty"`
 	UtilDataResponse *UtilDataResponse `json:"util.DataResponse,omitempty"`
 }

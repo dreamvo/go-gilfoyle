@@ -9,8 +9,8 @@
 
 package swagger
 
-type UtilDataResponse struct {
-	Code int32 `json:"code,omitempty"`
-	Data *interface{} `json:"data,omitempty"`
-	Metadata *interface{} `json:"metadata,omitempty"`
+type ApiMediasMetadata struct {
+	Limit int32 `json:"limit,omitempty"`
+	Offset int32 `json:"offset,omitempty"`
+	Total int32 `json:"total,omitempty"`
 }

@@ -472,11 +472,36 @@ definitions:
     properties:
       commit:
         type: "string"
+      database_dialect:
+        type: "string"
+      debug:
+        type: "boolean"
+      max_file_size:
+        type: "integer"
+      storage_driver:
+        type: "string"
       tag:
         type: "string"
     example:
+      max_file_size: 0
+      storage_driver: "storage_driver"
+      debug: true
       commit: "commit"
       tag: "tag"
+      database_dialect: "database_dialect"
+  api.MediasMetadata:
+    type: "object"
+    properties:
+      limit:
+        type: "integer"
+      offset:
+        type: "integer"
+      total:
+        type: "integer"
+    example:
+      total: 3
+      offset: 9
+      limit: 7
   api.UpdateMedia:
     type: "object"
     required:
@@ -660,7 +685,11 @@ definitions:
       data:
         type: "object"
         properties: {}
+      metadata:
+        type: "object"
+        properties: {}
     example:
+      metadata: "{}"
       code: 200
       data: "{}"
   util.ErrorResponse:
@@ -681,11 +710,16 @@ definitions:
         $ref: "#/definitions/util.DataResponse"
     example:
       util.DataResponse:
+        metadata: "{}"
         code: 200
         data: "{}"
       data:
+        max_file_size: 0
+        storage_driver: "storage_driver"
+        debug: true
         commit: "commit"
         tag: "tag"
+        database_dialect: "database_dialect"
   inline_response_200_1:
     type: "object"
     properties:
@@ -693,10 +727,17 @@ definitions:
         type: "array"
         items:
           $ref: "#/definitions/ent.Media"
+      metadata:
+        $ref: "#/definitions/api.MediasMetadata"
       util.DataResponse:
         $ref: "#/definitions/util.DataResponse"
     example:
+      metadata:
+        total: 3
+        offset: 9
+        limit: 7
       util.DataResponse:
+        metadata: "{}"
         code: 200
         data: "{}"
       data:
@@ -777,6 +818,7 @@ definitions:
         $ref: "#/definitions/util.DataResponse"
     example:
       util.DataResponse:
+        metadata: "{}"
         code: 200
         data: "{}"
       data:
@@ -823,6 +865,7 @@ definitions:
         $ref: "#/definitions/util.DataResponse"
     example:
       util.DataResponse:
+        metadata: "{}"
         code: 200
         data: "{}"
       data:

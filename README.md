@@ -40,6 +40,7 @@ Class | Method | HTTP request | Description
  - [ApiCreateMedia](docs/ApiCreateMedia.md)
  - [ApiFileFormat](docs/ApiFileFormat.md)
  - [ApiHealthCheckResponse](docs/ApiHealthCheckResponse.md)
+ - [ApiMediasMetadata](docs/ApiMediasMetadata.md)
  - [ApiUpdateMedia](docs/ApiUpdateMedia.md)
  - [EntMedia](docs/EntMedia.md)
  - [EntMediaEdges](docs/EntMediaEdges.md)

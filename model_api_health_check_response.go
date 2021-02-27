@@ -11,5 +11,9 @@ package swagger
 
 type ApiHealthCheckResponse struct {
 	Commit string `json:"commit,omitempty"`
+	DatabaseDialect string `json:"database_dialect,omitempty"`
+	Debug bool `json:"debug,omitempty"`
+	MaxFileSize int32 `json:"max_file_size,omitempty"`
+	StorageDriver string `json:"storage_driver,omitempty"`
 	Tag string `json:"tag,omitempty"`
 }
