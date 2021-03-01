@@ -45,7 +45,7 @@ func (a *StreamApiService) GetMediaPlaylistFile(ctx context.Context, mediaId str
 	)
 
 	// create path and map variables
-	localVarPath := a.client.cfg.BasePath + "/medias/{media_id}/stream/playlists/{filename}"
+	localVarPath := a.client.cfg.BasePath + "/medias/{media_id}/stream/{filename}"
 	localVarPath = strings.Replace(localVarPath, "{"+"media_id"+"}", fmt.Sprintf("%v", mediaId), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"filename"+"}", fmt.Sprintf("%v", filename), -1)
 

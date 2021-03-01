@@ -383,7 +383,7 @@ paths:
           schema:
             $ref: "#/definitions/util.ErrorResponse"
       deprecated: true
-  /medias/{media_id}/stream/playlists/{filename}:
+  /medias/{media_id}/stream/{filename}:
     get:
       tags:
       - "Stream"
