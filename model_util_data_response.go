@@ -11,6 +11,6 @@ package swagger
 
 type UtilDataResponse struct {
 	Code int32 `json:"code,omitempty"`
-	Data *interface{} `json:"data,omitempty"`
-	Metadata *interface{} `json:"metadata,omitempty"`
+	Data interface{} `json:"data,omitempty"`
+	Metadata interface{} `json:"metadata,omitempty"`
 }
